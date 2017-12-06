@@ -9,4 +9,11 @@ edit : purva
 Sida Yang
 
 Summer is coming
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/cheesiang89/Team10Stockist.git
+
+
+Silly input
+>>>>>>> branch 'master' of https://github.com/cheesiang89/Team10Stockist.git
