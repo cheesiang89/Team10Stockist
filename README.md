@@ -16,3 +16,6 @@ Sida Yang
 
 Summer is coming
 >>>>>>> branch 'master' of https://github.com/cheesiang89/Team10Stockist.git
+
+
+Silly input
