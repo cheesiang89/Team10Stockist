@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.team10.stockist;
 
 public class HeroChar {
 	private int id;
