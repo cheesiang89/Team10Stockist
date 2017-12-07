@@ -3,18 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>team10</groupId>
-	<artifactId>Team10Stockist</artifactId>
+	<groupId>sg.edu.iss</groupId>
+	<artifactId>simple</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Team10Stockist</name>
-	<description>CA: Stockist Inventory Management System</description>
+	<name>simple</name>
+	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.7.RELEASE</version>
+		<version>1.5.9.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,25 +22,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<jdk.version>1.8</jdk.version>
-		<spring.version>4.2.6.RELEASE</spring.version>
-		<spring-security.version>4.1.0.RELEASE</spring-security.version>
-		<spring-data-jpa.version>1.10.0.RELEASE</spring-data-jpa.version>
-		<hibernate.version>5.1.0.Final</hibernate.version>
-		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-		<mysql-connector.version>5.1.40</mysql-connector.version>
-		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<servlet.version>3.1.0</servlet.version>
-		<jsp.version>2.3.1</jsp.version>
+
+		<web.version>7.0</web.version>
 		<jstl.version>1.2</jstl.version>
-		<jstl.tag.version>1.1.2</jstl.tag.version>
-		<junit.version>4.12</junit.version>
-		<logback.version>1.1.3</logback.version>
-		<!-- Sitemesh -->
 		<sitemesh.version>2.4.2</sitemesh.version>
-		<!-- Additional Test Tools -->
-		<dbunit.version>2.5.0</dbunit.version>
-		<spring-test-dbunit.version>1.2.1</spring-test-dbunit.version>
 
 	</properties>
 
@@ -104,16 +89,41 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Standard Web Container -->
+		<!-- https://mvnrepository.com/artifact/javax/javaee-web-api -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>${web.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- JSTL -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<!-- Site Mesh Template Engine -->
+		<!-- https://mvnrepository.com/artifact/opensymphony/sitemesh-->
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>${sitemesh.version}</version>
+		</dependency>
+
+
 	</dependencies>
 
-		<build>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-				</plugin>
-			</plugins>
-		</build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 
 </project>
