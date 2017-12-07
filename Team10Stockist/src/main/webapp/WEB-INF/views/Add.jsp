@@ -1,12 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-</body>
-</html>
+<h3>New Product Page</h3>
+<form:form method="POST" modelAttribute="product"
+	action="${pageContext.request.contextPath}/Admin/Add">
+	<table>
+		<tbody>
+			<tr>
+				<td>Product Name</td>
+				<td><form:input path="name" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Color</td>
+				<td><form:input path="color" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td><form:input path="description" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Dimension</td>
+				<td><form:input path="dimension" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Shelf Location</td>
+				<td><form:input path="shelfLocation" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Unit Price</td>
+				<td><form:input path="unitPrice" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Manufacturer</td>
+				<td><form:input path="manufacturer" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Min. Reorder Qty</td>
+				<td><form:input path="minimumReorderQuantity" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Stock Qty</td>
+				<td><form:input path="stockQuantity" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Reorder Qty</td>
+				<td><form:input path="reorderQuantity" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Create" /></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</form:form>
+

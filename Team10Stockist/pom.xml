@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>sg.edu.iss</groupId>
-	<artifactId>simple</artifactId>
+	<groupId>sa45.Team10Stockist</groupId>
+	<artifactId>Team10Stockist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>simple</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Team10Stockist</name>
+	<description>SA45 Team 10 Stockist</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
