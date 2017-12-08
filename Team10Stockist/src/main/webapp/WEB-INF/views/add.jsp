@@ -53,7 +53,7 @@
 			</tr>
 			<tr>
 				<td>Reorder Qty</td>
-				<td><form:input path="reorderQuantity" /></td>
+				<td><form:input path="minimumInventoryQuantity" /></td>
 				<td></td>
 			</tr>
 			<tr>
