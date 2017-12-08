@@ -26,7 +26,7 @@ public class TransactionDetail implements Serializable {
 
 	//bi-directional many-to-one association to Transaction
 	@ManyToOne
-	@JoinColumn(name="trans_id")
+	@JoinColumn(name="trans_id", insertable=false, updatable=false)
 	private Transaction transaction;
 
 	public TransactionDetail() {
