@@ -1,6 +1,5 @@
 
 	function filt() {
-		alert("Test");
 		const inputs = $(".data")
 		const color = $("#color").val();
 		const manufacturer = $("#manufacturer").val();
