@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `stockist`.`product` (
   `dimension` VARCHAR(255) NULL,
   `shelf_location` VARCHAR(255) NULL,
   `unit_price` DOUBLE NULL,
-  `manufacturer` VARCHAR(255) NULL DEFAULT NULL,
-  `reorder_quantity` INT NULL,
+  `manufacturer` VARCHAR(255) NULL,
+  `minimum_inventory_quantity` INT NULL,
   `stock_quantity` INT NULL,
   `minimum_reorder_quantity` INT NULL,
   PRIMARY KEY (`part_number`))
@@ -79,14 +79,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stockist`.`transaction` (
   `trans_id` INT NOT NULL AUTO_INCREMENT,
-  `custoemr_id` INT NULL,
+  `customer_id` INT NULL,
   `user_id` INT NULL,
   `datetime` DATETIME NULL,
   PRIMARY KEY (`trans_id`),
-  INDEX `tra_cus_idx` (`custoemr_id` ASC),
+  INDEX `tra_cus_idx` (`customer_id` ASC),
   INDEX `tra_use_idx` (`user_id` ASC),
   CONSTRAINT `tra_cus`
-    FOREIGN KEY (`custoemr_id`)
+    FOREIGN KEY (`customer_id`)
     REFERENCES `stockist`.`customer` (`customer_id`)
     ON DELETE SET NULL
     ON UPDATE SET NULL,
@@ -165,9 +165,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockist`;
-INSERT INTO `stockist`.`product` (`part_number`, `name`, `color`, `description`, `dimension`, `shelf_location`, `unit_price`, `manufacturer`, `reorder_quantity`, `stock_quantity`, `minimum_reorder_quantity`) VALUES (1, '1', '1', '1', '1', '1', 1, '1', 1, 1, 1);
-INSERT INTO `stockist`.`product` (`part_number`, `name`, `color`, `description`, `dimension`, `shelf_location`, `unit_price`, `manufacturer`, `reorder_quantity`, `stock_quantity`, `minimum_reorder_quantity`) VALUES (2, '1', '2', '2', '2', '2', 2, '2', 2, 2, 2);
-INSERT INTO `stockist`.`product` (`part_number`, `name`, `color`, `description`, `dimension`, `shelf_location`, `unit_price`, `manufacturer`, `reorder_quantity`, `stock_quantity`, `minimum_reorder_quantity`) VALUES (3, '1', '3', '3', '3', '3', 3, '3', 3, 3, 3);
+INSERT INTO `stockist`.`product` (`part_number`, `name`, `color`, `description`, `dimension`, `shelf_location`, `unit_price`, `manufacturer`, `minimum_inventory_quantity`, `stock_quantity`, `minimum_reorder_quantity`) VALUES (1, '1', '1', '1', '1', '1', 1, '1', 1, 1, 1);
+INSERT INTO `stockist`.`product` (`part_number`, `name`, `color`, `description`, `dimension`, `shelf_location`, `unit_price`, `manufacturer`, `minimum_inventory_quantity`, `stock_quantity`, `minimum_reorder_quantity`) VALUES (2, '2', '2', '2', '2', '2', 2, '2', 2, 2, 2);
+INSERT INTO `stockist`.`product` (`part_number`, `name`, `color`, `description`, `dimension`, `shelf_location`, `unit_price`, `manufacturer`, `minimum_inventory_quantity`, `stock_quantity`, `minimum_reorder_quantity`) VALUES (3, '3', '3', '3', '3', '3', 3, '3', 3, 3, 3);
 
 COMMIT;
 
@@ -201,9 +201,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockist`;
-INSERT INTO `stockist`.`transaction` (`trans_id`, `custoemr_id`, `user_id`, `datetime`) VALUES (1, 1, 1, '1970-01-01');
-INSERT INTO `stockist`.`transaction` (`trans_id`, `custoemr_id`, `user_id`, `datetime`) VALUES (2, 2, 2, '1970-01-01');
-INSERT INTO `stockist`.`transaction` (`trans_id`, `custoemr_id`, `user_id`, `datetime`) VALUES (3, 3, 3, '1970-01-01');
+INSERT INTO `stockist`.`transaction` (`trans_id`, `customer_id`, `user_id`, `datetime`) VALUES (1, 1, 1, '1970-01-01');
+INSERT INTO `stockist`.`transaction` (`trans_id`, `customer_id`, `user_id`, `datetime`) VALUES (2, 2, 2, '1970-01-01');
+INSERT INTO `stockist`.`transaction` (`trans_id`, `customer_id`, `user_id`, `datetime`) VALUES (3, 3, 3, '1970-01-01');
 
 COMMIT;
 
