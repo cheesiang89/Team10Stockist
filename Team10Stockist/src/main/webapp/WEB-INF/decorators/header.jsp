@@ -1,0 +1,22 @@
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
+	prefix="decorator"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<html>
+<head>
+<c:url value="/css/simple.css" var="ss" />
+<link rel="STYLESHEET" type="text/css" href="${ss}" />
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script src="../js/script.js"></script>
+</head>
+<body>
+	<div>
+	<h1 align="center">
+		<spring:message code="title.application" />
+	</h1>
+</div>
+
+

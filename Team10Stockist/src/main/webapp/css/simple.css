@@ -3,7 +3,6 @@ BODY {
 	font-size : 10pt;
 	
 }
-
 A {
 	text-decoration: underline;
 	color: #6600CC;
@@ -38,8 +37,7 @@ h2 {
 	text-shadow: 0 -1px rgba(0,0,0,0.6);
 	font-size: 18px;
 	line-height: 40px;
-	background: #355681;
-	background: rgba(53,86,129, 0.8);
+	background: #00ff40;
 	border: 1px solid #fff;
 	padding: 5px 15px;
 	color: white;
@@ -131,7 +129,7 @@ th
 }
 td
 {
-	color: #669;
+	color: red;
 	padding: 9px 8px 0px 8px;
 	
 }
@@ -161,4 +159,29 @@ hr {
     border-width: 1px;
 }
 
+#products {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
 
+#products td, #products th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#products tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#products tr:hover {
+	background-color: #ddd;
+}
+
+#products th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}

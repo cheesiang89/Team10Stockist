@@ -2,7 +2,7 @@
 <decorators defaultdir="/WEB-INF/decorators/">
 
 	
-    <decorator name="default" page="Layout.jsp">
+    <decorator name="default" page="layout.jsp">
         <pattern>*</pattern>
      
         
