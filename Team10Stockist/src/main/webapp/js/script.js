@@ -12,9 +12,9 @@
 			const c = inputs[i].getElementsByClassName("color")[0].innerHTML;
 			const m = inputs[i].getElementsByClassName("manufacturer")[0].innerHTML;
 			const n = inputs[i].getElementsByClassName("partNumber")[0].innerHTML;
-			if (color != "all" & c != color) {
+			if (color != "All" & c != color) {
 				inputs[i].style.display = "none";
-			} else if (manufacturer != "all" & m != manufacturer) {
+			} else if (manufacturer != "All" & m != manufacturer) {
 				inputs[i].style.display = "none";
 			}else if (!n.includes(searchtext)){
 				inputs[i].style.display = "none";
