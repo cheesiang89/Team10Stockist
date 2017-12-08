@@ -26,13 +26,13 @@ public class Product implements Serializable {
 
 	private String manufacturer;
 
+	@Column(name="minimum_inventory_quantity")
+	private int minimumInventoryQuantity;
+
 	@Column(name="minimum_reorder_quantity")
 	private int minimumReorderQuantity;
 
 	private String name;
-
-	@Column(name="reorder_quantity")
-	private int reorderQuantity;
 
 	@Column(name="shelf_location")
 	private String shelfLocation;
@@ -42,10 +42,6 @@ public class Product implements Serializable {
 
 	@Column(name="unit_price")
 	private double unitPrice;
-
-	//bi-directional many-to-many association to Supplier
-	@ManyToMany(mappedBy="products")
-	private List<Supplier> suppliers;
 
 	//bi-directional many-to-one association to TransactionDetail
 	@OneToMany(mappedBy="product")
@@ -94,6 +90,14 @@ public class Product implements Serializable {
 		this.manufacturer = manufacturer;
 	}
 
+	public int getMinimumInventoryQuantity() {
+		return this.minimumInventoryQuantity;
+	}
+
+	public void setMinimumInventoryQuantity(int minimumInventoryQuantity) {
+		this.minimumInventoryQuantity = minimumInventoryQuantity;
+	}
+
 	public int getMinimumReorderQuantity() {
 		return this.minimumReorderQuantity;
 	}
@@ -108,14 +112,6 @@ public class Product implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getReorderQuantity() {
-		return this.reorderQuantity;
-	}
-
-	public void setReorderQuantity(int reorderQuantity) {
-		this.reorderQuantity = reorderQuantity;
 	}
 
 	public String getShelfLocation() {
@@ -140,14 +136,6 @@ public class Product implements Serializable {
 
 	public void setUnitPrice(double unitPrice) {
 		this.unitPrice = unitPrice;
-	}
-
-	public List<Supplier> getSuppliers() {
-		return this.suppliers;
-	}
-
-	public void setSuppliers(List<Supplier> suppliers) {
-		this.suppliers = suppliers;
 	}
 
 	public List<TransactionDetail> getTransactionDetails() {
