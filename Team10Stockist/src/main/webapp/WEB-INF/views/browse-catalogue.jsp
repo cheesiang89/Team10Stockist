@@ -8,18 +8,21 @@
 	</div>
 	<div>
 		<select id="color" onchange="filt()">
-			<option value="all">ALL</option>
-			<option value="c1">c1</option>
-			<option value="c2">c2</option>
-			<option value="c3">c3</option>
-			<option value="c4">c4</option>
+			<option value="All">ALL</option>
+			<option value="Blue">Blue</option>
+			<option value="Red">Red</option>
+			<option value="White">White</option>
+			<option value="Yellow">Yellow</option>
+
+
 		</select> 
 		<select id="manufacturer" onchange="filt()">
-			<option value="all">ALL</option>
-			<option value="m1">m1</option>
-			<option value="m2">m2</option>
-			<option value="m3">m3</option>
-			<option value="m4">m4</option>
+			<option value="All">ALL</option>
+			<option value="Honda">Honda</option>
+			<option value="Mitsubishi">Mitsubishi</option>
+			<option value="Nissan">Nissan</option>
+			<option value="Toyota">Toyota</option>
+			<option value="Subaru">Subaru</option>
 		</select>
 	</div>
 
