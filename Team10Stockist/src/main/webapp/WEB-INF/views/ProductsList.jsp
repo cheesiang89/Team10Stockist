@@ -20,13 +20,16 @@
 	for (Product p : plist) {
 		t.append("<tr class=\"data\">");
 		t.append("<td class=\"partNumber\">" + p.getPartNumber() + "</td>");
-		t.append("<td>" + p.getName() + "</td>\n");
+		t.append("<td class=\"name\">" + p.getName() + "</td>\n");
 		t.append("<td class=\"color\">" + p.getColor() + "</td>\n");
 		t.append("<td class=\"manufacturer\">" + p.getManufacturer() + "</td>");
 		t.append("<td>" + p.getDimension() + "</td>");
 		t.append("<td>" + p.getUnitPrice() + "</td>");
-		t.append("<td><input type=\"button\" value=\"Update\" onclick=\"updateRow(this)\" name=\"${product.partNumber}\"></td>");
-		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\" name=\"${product.partNumber}\"></td>");
+		/* t.append("<td><a href=\"http://google.com\" class=\"button\">Go1 to Google</a></td>"); */
+		t.append("<td><input type=\"button\" value=\"History\" onclick=\"location.href='/team10stockist/admin/add';\" name=\"" +p.getPartNumber() +"\"></td>");
+		t.append("<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/admin/add';\" name=\"" +p.getPartNumber() +"\"></td>");
+		t.append("<td><input type=\"button\" value=\"Update\" onclick=\"updateRow(this)\" name=\"" +p.getPartNumber() +"\"></td>");
+		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\" name=\"" +p.getPartNumber() +"\"></td>");
 		t.append("</tr>");
 	}
 	t.append("</table>");

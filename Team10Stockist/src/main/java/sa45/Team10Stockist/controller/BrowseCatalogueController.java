@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.iss.cats.controller.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import sa45.Team10Stockist.repository.ProductRepository;
@@ -33,24 +34,36 @@ import sa45.Team10Stockist.model.Product;
 public class BrowseCatalogueController {
 	@Autowired
 	private ProductService pService;
+
 	
 	@RequestMapping(value = "/catalogue", method= RequestMethod.GET)
 	public ModelAndView browseCataloguePage() {
 		ModelAndView mav = new ModelAndView("login");
-		serSession us = (UserSession) session.getAttribute("USERSESSION");
-		if (us.getSessionId() != null) {
+		//UserSession us = (UserSession) session.getAttribute("USERSESSION");
+		//if (us.getSessionId() != null) {
 		mav = new ModelAndView("browse-catalogue");
 		ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProduct();
 		mav.addObject("plist", productList);
 		return mav;
-		}
-		return mav;
+		//}
+		//return mav;
 	}
 	
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "/catalogue/delete/{partNumber}", method= RequestMethod.GET)
+	public ModelAndView deleteProduct(@PathVariable String partNumber, final RedirectAttributes redirectAttributes){
+		
+		pService.removeProduct(pService.findProduct(Integer.parseInt(partNumber)));
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/home/catalogue");
+		return mav;
+		
+	}
+	
+	/*@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home/login";
 
-	}
+	}*/
+	
 }
