@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>sa45.Team10Stockist</groupId>
-	<artifactId>Team10Stockist</artifactId>
+	<artifactId>team10stockist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Team10Stockist</name>
+	<name>team10stockist</name>
 	<description>SA45 Team 10 Stockist</description>
 
 	<parent>
