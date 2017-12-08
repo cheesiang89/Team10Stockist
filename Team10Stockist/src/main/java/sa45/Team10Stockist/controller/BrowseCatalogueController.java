@@ -12,7 +12,10 @@ import sa45.Team10Stockist.repository.ProductRepository;
 import sa45.Team10Stockist.service.ProductService;
 import sa45.Team10Stockist.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-
+//TODO
+// 1. Check session login data (Admin/catalogue)
+// 2. Delete product
+//3. Adjust filter list
 @RequestMapping(value = "/home")
 @Controller
 public class BrowseCatalogueController {
