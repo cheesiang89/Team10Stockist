@@ -42,11 +42,6 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>Min. Reorder Qty</td>
-				<td><form:input path="minimumReorderQuantity" /></td>
-				<td></td>
-			</tr>
-			<tr>
 				<td>Stock Qty</td>
 				<td><form:input path="stockQuantity" /></td>
 				<td></td>
