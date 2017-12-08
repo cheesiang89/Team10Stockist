@@ -24,7 +24,7 @@ public class Transaction implements Serializable {
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
-	@JoinColumn(name="custoemr_id")
+	@JoinColumn(name="customer_id")
 	private Customer customer;
 
 	//bi-directional many-to-one association to User

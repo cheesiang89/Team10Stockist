@@ -26,13 +26,13 @@ public class Product implements Serializable {
 
 	private String manufacturer;
 
+	@Column(name="minimum_inventory_quantity")
+	private int minimumInventoryQuantity;
+
 	@Column(name="minimum_reorder_quantity")
 	private int minimumReorderQuantity;
 
 	private String name;
-
-	@Column(name="reorder_quantity")
-	private int reorderQuantity;
 
 	@Column(name="shelf_location")
 	private String shelfLocation;
@@ -94,6 +94,14 @@ public class Product implements Serializable {
 		this.manufacturer = manufacturer;
 	}
 
+	public int getMinimumInventoryQuantity() {
+		return this.minimumInventoryQuantity;
+	}
+
+	public void setMinimumInventoryQuantity(int minimumInventoryQuantity) {
+		this.minimumInventoryQuantity = minimumInventoryQuantity;
+	}
+
 	public int getMinimumReorderQuantity() {
 		return this.minimumReorderQuantity;
 	}
@@ -108,14 +116,6 @@ public class Product implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getReorderQuantity() {
-		return this.reorderQuantity;
-	}
-
-	public void setReorderQuantity(int reorderQuantity) {
-		this.reorderQuantity = reorderQuantity;
 	}
 
 	public String getShelfLocation() {
