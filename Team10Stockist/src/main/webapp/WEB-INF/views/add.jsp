@@ -42,8 +42,8 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>Min. Reorder Qty</td>
-				<td><form:input path="minimumReorderQuantity" /></td>
+				<td>Min. Inventory Qty</td>
+				<td><form:input path="minimumInventoryQuantity" /></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -52,8 +52,8 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>Reorder Qty</td>
-				<td><form:input path="minimumInventoryQuantity" /></td>
+				<td>Min. Reorder Qty</</td>
+				<td><form:input path="MinimumReorderQuantity" /></td>
 				<td></td>
 			</tr>
 			<tr>
