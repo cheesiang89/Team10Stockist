@@ -37,7 +37,7 @@ public class BrowseCatalogueController {
 	@RequestMapping(value = "/catalogue", method= RequestMethod.GET)
 	public ModelAndView browseCataloguePage() {
 		ModelAndView mav = new ModelAndView("login");
-		UserSession us = (UserSession) session.getAttribute("USERSESSION");
+		serSession us = (UserSession) session.getAttribute("USERSESSION");
 		if (us.getSessionId() != null) {
 		mav = new ModelAndView("browse-catalogue");
 		ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProduct();
