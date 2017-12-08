@@ -64,11 +64,30 @@ public class AdminController {
 	public ModelAndView editProductPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
 			final RedirectAttributes redirectAttributes) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/admin/product");
+		ModelAndView mav = new ModelAndView("redirect:/admin/product/{partNumber}");
 		pservice.changeProduct(product);
 		String message = "Product " + product.getPartNumber() + " sucessfully updated.";
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
 
+	@RequestMapping(value = "/product/{partNumber}", method = RequestMethod.GET)
+	public ModelAndView productPage(@PathVariable String partNumber) {
+		
+		ModelAndView mav = new ModelAndView("product");
+		int pnum = Integer.parseInt(partNumber);
+		Product product = pservice.findProduct(pnum);
+		mav.addObject("product", product);
+		return mav;
+
+	}
+	
+	@RequestMapping(value = "/product/{partNumber}", method = RequestMethod.POST)
+	public ModelAndView productPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
+			final RedirectAttributes redirectAttributes) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/admin/add");
+		
+		return mav;
+	}
 }

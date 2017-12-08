@@ -1,11 +1,16 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<h3>New Product Page</h3>
+<h3>Product Edit Page</h3>
 <form:form method="POST" modelAttribute="product"
-	action="${pageContext.request.contextPath}/admin/edit.html">
+	action="${pageContext.request.contextPath}/admin/edit/{partNumber}">
 	<table>
 		<tbody>
+			<tr>
+				<td>Part Number</td>
+				<td><form:input path="partNumber" readonly="true" /></td>
+				<td></td>
+			</tr>
 			<tr>
 				<td>Product Name</td>
 				<td><form:input path="name" /></td>
@@ -57,7 +62,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Create" /></td>
+				<td><input type="submit" value="Update" /></td>
 				<td></td>
 				<td></td>
 			</tr>
