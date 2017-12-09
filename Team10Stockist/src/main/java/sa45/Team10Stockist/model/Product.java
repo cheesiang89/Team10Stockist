@@ -43,6 +43,10 @@ public class Product implements Serializable {
 	@Column(name="unit_price")
 	private double unitPrice;
 
+	//bi-directional many-to-many association to Supplier
+	@ManyToMany(mappedBy="products")
+	private List<Supplier> suppliers;
+
 	//bi-directional many-to-one association to TransactionDetail
 	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<TransactionDetail> transactionDetails;
@@ -136,6 +140,14 @@ public class Product implements Serializable {
 
 	public void setUnitPrice(double unitPrice) {
 		this.unitPrice = unitPrice;
+	}
+
+	public List<Supplier> getSuppliers() {
+		return this.suppliers;
+	}
+
+	public void setSuppliers(List<Supplier> suppliers) {
+		this.suppliers = suppliers;
 	}
 
 	public List<TransactionDetail> getTransactionDetails() {

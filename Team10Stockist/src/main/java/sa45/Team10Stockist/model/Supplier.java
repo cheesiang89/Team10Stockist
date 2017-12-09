@@ -2,6 +2,7 @@ package sa45.Team10Stockist.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -22,6 +23,19 @@ public class Supplier implements Serializable {
 
 	@Column(name="supplier_name")
 	private String supplierName;
+
+	//bi-directional many-to-many association to Product
+	@ManyToMany
+	@JoinTable(
+		name="supplier_catalog"
+		, joinColumns={
+			@JoinColumn(name="supplier_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="part_number")
+			}
+		)
+	private List<Product> products;
 
 	public Supplier() {
 	}
@@ -48,6 +62,14 @@ public class Supplier implements Serializable {
 
 	public void setSupplierName(String supplierName) {
 		this.supplierName = supplierName;
+	}
+
+	public List<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 }

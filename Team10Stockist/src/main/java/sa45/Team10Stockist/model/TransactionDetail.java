@@ -21,12 +21,12 @@ public class TransactionDetail implements Serializable {
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
-	@JoinColumn(name="part_number" , insertable=false, updatable=false)
+	@JoinColumn(name="part_number", insertable=false, updatable=false)
 	private Product product;
 
 	//bi-directional many-to-one association to Transaction
 	@ManyToOne
-	@JoinColumn(name="trans_id" , insertable=false, updatable=false)
+	@JoinColumn(name="trans_id", insertable=false, updatable=false)
 	private Transaction transaction;
 
 	public TransactionDetail() {

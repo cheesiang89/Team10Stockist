@@ -52,18 +52,18 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
   `part_number` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `color` varchar(255) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `color` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `dimension` varchar(255) NOT NULL,
-  `shelf_location` varchar(255) NOT NULL,
+  `dimension` varchar(255) DEFAULT NULL,
+  `shelf_location` varchar(255) DEFAULT NULL,
   `unit_price` double NOT NULL,
-  `manufacturer` varchar(255) NOT NULL,
+  `manufacturer` varchar(255) DEFAULT NULL,
   `minimum_inventory_quantity` int(11) NOT NULL,
   `stock_quantity` int(11) NOT NULL,
   `minimum_reorder_quantity` int(11) NOT NULL,
   PRIMARY KEY (`part_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=1112 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1118 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Right Headlight','Blue','Good','12x12','level1',1.9,'Toyota',11,12,3),(2,'Left Headlight','Yellow','New','22x22','level1',2.3,'Toyota',20,20,14),(34,'Right Fender','White','Good','33x33','level1',31.1,'Honda',20,34,5),(56,'Side Mirrors Left','Red','Good','44x44','level4',11.1,'Honda',30,18,16),(78,'Rear Left Door','Blue','Good','55x43','level3',22.3,'Honda',40,40,27),(90,'Right Side Mirror','Yellow','Good','67x12','level3',22.2,'Nissan',50,43,18),(100,'A/C Control Panel','White','New','11x34','level1',12,'Nissan',60,55,19),(134,'Rear Bumper','White','New','10x31','level2',32.1,'Toyota',55,50,10),(178,'Left Tail Light','Blue','New','11x31','level2',22.5,'Toyota',43,40,12),(234,'Right Tail Light','Yellow','New','21x11','level1',44.2,'Mitsubishi',22,20,14),(345,'A/C Compressor','Yellow','New','22x22','level1',32.7,'Mitsubishi',34,36,15),(567,'Left Tail Light','Yellow','New','33x33','level1',12.9,'Mitsubishi',45,38,16),(789,'Front Right Door','White','New','33x33','level3',0.99,'Subaru',32,30,17),(800,'Interior Parts','White','New','22x22','level3',1.44,'Nissan',44,20,18),(900,'Regulators','Blue','New','22x22','level2',2.67,'Mitsubishi',67,48,29),(1111,'Front Bumper','Yellow','New','33x33','level2',5.11,'Mitsubishi',22,19,20);
+INSERT INTO `product` VALUES (1,'Right Headlight','Blue','Good','12x12','level1',1.9,'Toyota',11,12,3),(2,'Left Headlight','Yellow','New','22x22','level1',2.3,'Toyota',20,20,14),(34,'Right Fender','White','Good','33x33','level1',31.1,'Honda',20,34,5),(56,'Side Mirrors Left','Red','Good','44x44','level4',11.1,'Honda',30,18,16),(78,'Rear Left Door','Blue','Good','55x43','level3',22.3,'Honda',40,40,27),(90,'Right Side Mirror','Yellow','Good','67x12','level3',22.2,'Nissan',50,43,18),(100,'A/C Control Panel','White','New','11x34','level1',12,'Nissan',60,55,19),(134,'Rear Bumper','White','New','10x31','level2',32.1,'Toyota',55,50,10),(178,'Left Tail Light','Blue','New','11x31','level2',22.5,'Toyota',43,40,12),(234,'Right Tail Light','Yellow','New','21x11','level1',44.2,'Mitsubishi',22,20,14),(345,'A/C Compressor','Yellow','New','22x22','level1',32.7,'Mitsubishi',34,36,15),(567,'Left Tail Light','Yellow','New','33x33','level1',12.9,'Mitsubishi',45,38,16),(789,'Front Right Door','White','New','33x33','level3',0.99,'Subaru',32,30,17),(800,'Interior Parts','White','New','22x22','level3',1.44,'Nissan',44,20,18),(900,'Regulators','Blue','New','22x22','level2',2.67,'Mitsubishi',67,48,29),(1111,'Front Bumper','Yellow','New','33x33','level2',5.11,'Mitsubishi',22,19,20),(1112,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,0),(1113,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,0),(1114,NULL,NULL,NULL,NULL,NULL,0,NULL,0,0,0),(1115,'','','','','',0,'',0,0,0),(1116,'Wheel','Blue','New','12x12','s1',1.1,'ee',1,2,1),(1117,'','','','','',0,'',0,0,0);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +111,10 @@ DROP TABLE IF EXISTS `supplier_catalog`;
 CREATE TABLE `supplier_catalog` (
   `supplier_id` int(11) NOT NULL,
   `part_number` int(11) NOT NULL,
-  PRIMARY KEY (`supplier_id`,`part_number`)
+  PRIMARY KEY (`supplier_id`,`part_number`),
+  KEY `pnumber_idx` (`part_number`),
+  CONSTRAINT `sca_pro` FOREIGN KEY (`part_number`) REFERENCES `product` (`part_number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `sca_sup` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -221,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-08 16:43:04
+-- Dump completed on 2017-12-09 17:00:22
