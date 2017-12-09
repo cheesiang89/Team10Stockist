@@ -10,8 +10,8 @@
 <h3>Login</h3>
 		<table class="framed" >
 			<tr>
-				<td><spring:message code="fieldLabel.email" /></td>
-				<td><form:input path="email" /></td>
+				<td><spring:message code="fieldLabel.name" /></td>
+				<td><form:input path="name" /></td>
 			
 			</tr>
 			<tr>

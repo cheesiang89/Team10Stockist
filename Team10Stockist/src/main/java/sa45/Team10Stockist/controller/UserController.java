@@ -40,9 +40,9 @@ public class UserController {
 		if (bindingresult.hasErrors()) {
 			return mav;
 		}
-		if(uService.authenticate(user.getEmail(), user.getPassword())==null)
+		if(uService.authenticate(user.getName(), user.getPassword())==null)
 		{
-		mav.addObject("error", "invalid email or password");
+		mav.addObject("error", "invalid username or password");
         return mav;
 		}
 		else{
