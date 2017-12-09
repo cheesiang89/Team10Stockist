@@ -27,7 +27,6 @@ public class AdminController {
 	public ModelAndView newProductPage() {
 		Product p = new Product();
 		ModelAndView mav = new ModelAndView("add", "product", p);
-		// mav.addObject("product", pservice.createProduct(p));
 		return mav;
 	}
 
