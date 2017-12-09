@@ -9,7 +9,7 @@
 	</div>
 	<div>
 		<select name="color" id="color">
-			<option value="All">ALL</option>
+			<option value="">""</option>
 			<option value="Blue">Blue</option>
 			<option value="Red">Red</option>
 			<option value="White">White</option>
@@ -18,7 +18,7 @@
 
 		</select> 
 		<select name="manufacturer" id="manufacturer">
-			<option value="All">ALL</option>
+			<option value="">""</option>
 			<option value="Honda">Honda</option>
 			<option value="Mitsubishi">Mitsubishi</option>
 			<option value="Nissan">Nissan</option>
