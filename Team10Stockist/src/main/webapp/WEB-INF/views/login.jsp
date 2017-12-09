@@ -1,13 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<spring:url value="/css/simple.css" var="style"/>
+<link rel="STYLESHEET" type="text/css"
+	href="${style}" />
+<form:form modelAttribute="user" method="POST" action="${pageContext.request.contextPath}/home/authenticate" >
+	
+<h3>Login</h3>
+		<table class="framed" >
+			<tr>
+				<td><spring:message code="fieldLabel.email" /></td>
+				<td><form:input path="email" /></td>
+			
+			</tr>
+			<tr>
+				<td><spring:message code="fieldLabel.password" /></td>
+				<td><form:password path="password" /></td>
+			
+			</tr>
+			<tr>
+				<td><div>${error}</div></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			<td>
+			<form:button name="submit" type="submit" value="s">
+					<img src="${pageContext.request.contextPath}/image/button_login.gif" alt="" align="middle">
+				</form:button></td>
+			<td>
+			<form:button name="cancel" type="reset" value="r">
+					<img src="${pageContext.request.contextPath}/image/button_clear.gif" alt="" align="middle">
+				</form:button>
+				</td>
+			</tr>
+		</table>
+	</form:form>
+>
