@@ -23,7 +23,7 @@ public class AdminController {
 	@Autowired
 	ProductService pservice;
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/add", method = RequestMethod.GET)
 	public ModelAndView newProductPage() {
 		Product p = new Product();
 		ModelAndView mav = new ModelAndView("add", "product", p);
@@ -33,7 +33,7 @@ public class AdminController {
 
 	// When @ModelAttribute tag is used it means the whole form's data
 	// is passed in as the parameters
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/product/add", method = RequestMethod.POST)
 	public ModelAndView createNewProduct(@ModelAttribute Product product, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 
@@ -49,7 +49,7 @@ public class AdminController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/edit/{partNumber}", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/edit/{partNumber}", method = RequestMethod.GET)
 	public ModelAndView editProductPage(@PathVariable String partNumber) {
 		
 		ModelAndView mav = new ModelAndView("edit");
@@ -60,7 +60,7 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value = "/edit/{partNumber}", method = RequestMethod.POST)
+	@RequestMapping(value = "/product/edit/{partNumber}", method = RequestMethod.POST)
 	public ModelAndView editProductPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
 			final RedirectAttributes redirectAttributes) {
 		
@@ -71,23 +71,4 @@ public class AdminController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/product/{partNumber}", method = RequestMethod.GET)
-	public ModelAndView productPage(@PathVariable String partNumber) {
-		
-		ModelAndView mav = new ModelAndView("product");
-		int pnum = Integer.parseInt(partNumber);
-		Product product = pservice.findProduct(pnum);
-		mav.addObject("product", product);
-		return mav;
-
-	}
-	
-	@RequestMapping(value = "/product/{partNumber}", method = RequestMethod.POST)
-	public ModelAndView productPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
-			final RedirectAttributes redirectAttributes) {
-		
-		ModelAndView mav = new ModelAndView("redirect:/admin/add");
-		
-		return mav;
-	}
 }
