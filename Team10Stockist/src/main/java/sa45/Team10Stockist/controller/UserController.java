@@ -27,12 +27,12 @@ public class UserController {
 	@Autowired
 	private UserService uService;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView login() {
 		return new ModelAndView("login", "user", new User());
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView login( @ModelAttribute User user, BindingResult bindingresult, HttpSession session ) {
 		
 		ModelAndView mav = new ModelAndView("login");
@@ -49,7 +49,7 @@ public class UserController {
 			User u = uService.authenticate(user.getEmail(), user.getPassword());
 			us.setUser(u);
 			us.setSessionId(session.getId());
-			mav = new ModelAndView("redirect:/home");
+			mav = new ModelAndView("redirect:/home/catalogue");
 			session.setAttribute("USERSESSION", us);  
 		}
 		return mav;
@@ -58,7 +58,7 @@ public class UserController {
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 		
-		return "redirect:/";
+		return "redirect:/home";
 
 	}
 	

@@ -5,7 +5,7 @@
 <spring:url value="/css/simple.css" var="style"/>
 <link rel="STYLESHEET" type="text/css"
 	href="${style}" />
-<form:form modelAttribute="user" method="POST" action="${pageContext.request.contextPath}/home/login" >
+<form:form modelAttribute="user" method="POST" action="${pageContext.request.contextPath}/home" >
 	
 <h3>Login</h3>
 		<table class="framed" >
