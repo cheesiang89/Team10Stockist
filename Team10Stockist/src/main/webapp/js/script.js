@@ -1,6 +1,6 @@
 
 	function filt() {
-		window.alert("s");
+		//window.alert("s");
 		const inputs = $(".data")
 		const color = $("#color").val();
 		const manufacturer = $("#manufacturer").val();
@@ -23,15 +23,18 @@
 	}
 	function deleteRow(btn) {
 		/*window.alert(window.location.pathname);*/
-		window.alert("s");
+		//window.alert("s");
 		const no =btn.parentNode.parentNode.getElementsByClassName("partNumber")[0].innerHTML;
 		const name =btn.parentNode.parentNode.getElementsByClassName("name")[0].innerHTML;
 		if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) { 
-			  window.open(window.location.href+"/delete/"+no);
-			}
+			const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
+			$.ajax({url: deleteurl});
+			var row = btn.parentNode.parentNode;
+			row.parentNode.removeChild(row);
+			
 	}
-		/*var row = btn.parentNode.parentNode;
-		row.parentNode.removeChild(row);*/
+		}
+		/*/
 /*
  		var request = XMLHttpRequest();
 		var url = "DeleteProductRow?partNumber=" + btn.name;
@@ -46,5 +49,3 @@
 		request.onreadystatechange = function(){taskFinish(btn);};
 		request.open("GET", url, true);
 		request.send(); */
-
-	
