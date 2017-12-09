@@ -74,8 +74,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/catalogue/product/{partNumber}", method = RequestMethod.POST)
-	public ModelAndView productPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
-			final RedirectAttributes redirectAttributes) {
+	public ModelAndView productPage(@ModelAttribute Product product) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/home/catalogue");
 		

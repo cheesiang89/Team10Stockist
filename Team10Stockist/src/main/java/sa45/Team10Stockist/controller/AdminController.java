@@ -30,20 +30,14 @@ public class AdminController {
 		return mav;
 	}
 
-	// When @ModelAttribute tag is used it means the whole form's data
-	// is passed in as the parameters
 	@RequestMapping(value = "/product/add", method = RequestMethod.POST)
 	public ModelAndView createNewProduct(@ModelAttribute Product product, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 
 		ModelAndView mav = new ModelAndView();
-		String message = "New Product" + product.getPartNumber() + "was successfully created.";
-
 		pservice.createProduct(product);
-		// This is a POST. Hence you only pass in the view path in a redirect
-		// and not at the constructor.
-		mav.setViewName("redirect:/admin/product");
-
+		String message = "New Product" + product.getPartNumber() + "was successfully created.";
+		mav.setViewName("redirect:/home/catalogue");
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
@@ -63,7 +57,7 @@ public class AdminController {
 	public ModelAndView editProductPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
 			final RedirectAttributes redirectAttributes) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/admin/product/{partNumber}");
+		ModelAndView mav = new ModelAndView("redirect:/home/catalogue/product/" + product.getPartNumber());
 		pservice.changeProduct(product);
 		String message = "Product " + product.getPartNumber() + " sucessfully updated.";
 		redirectAttributes.addFlashAttribute("message", message);

@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	@Transactional
-	public User authenticate(String name, String password) {
-		User user = userRepository.findUserByNamePwd(name, password);
+	public User authenticate(String email, String password) {
+		User user = userRepository.findUserByNamePwd(email, password);
 		return user;
 	}
 	
