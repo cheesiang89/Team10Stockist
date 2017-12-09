@@ -27,12 +27,12 @@ public class UserController {
 	@Autowired
 	private UserService uService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {
 		return new ModelAndView("login", "user", new User());
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login( @ModelAttribute User user, BindingResult bindingresult, HttpSession session ) {
 		
 		ModelAndView mav = new ModelAndView("login");

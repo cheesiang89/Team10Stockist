@@ -12,8 +12,9 @@ import sa45.Team10Stockist.model.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 	
-	User findByEmail(String email);
+	@Query("Select u FROM User u WHERE u.email =:nm")
+	User findByEmail(@Param("nm") String nm);
 	
-	@Query("Select u FROM user u WHERE u.email =:nm AND u.password =:pwd")
-	User findUserByNamePwd(@Param("nm") String name, @Param("pwd") String password);
+	@Query("Select u FROM User u WHERE u.email =:nm AND u.password =:pwd")
+	User findUserByNamePwd(@Param("nm") String nm, @Param("pwd") String pwd);
 }
