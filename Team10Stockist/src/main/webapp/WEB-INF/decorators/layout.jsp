@@ -10,8 +10,6 @@
 					<%@ include file="menu.jsp"%>
 				</div>
 			</td>
-			</tr>
-			<tr>
 			<td>
 				<div>
 					<decorator:body />

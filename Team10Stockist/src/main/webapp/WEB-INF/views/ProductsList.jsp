@@ -9,13 +9,13 @@
 	StringBuffer t = new StringBuffer();
 	t.append("<table id=\"products\">");
 	t.append("<tr >");
-	t.append("<th style=' padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color: white;'>Part Number</th>");
+	t.append("<th style=' padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #45c693;color: white;'>Part Number</th>");
 	t.append("<th>Name</th>");
 	t.append("<th>Color</th>");
 	t.append("<th>Manufacturer</th>");
 	t.append("<th>Dimension</th>");
 	t.append("<th>Unit Price</th>");
-	t.append("<th colspan=\"2\"></th>");
+	t.append("<th colspan=\"4\"></th>");
 	t.append("</tr>");
 	for (Product p : plist) {
 		t.append("<tr class=\"data\">");

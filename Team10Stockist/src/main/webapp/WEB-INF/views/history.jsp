@@ -4,8 +4,7 @@
 
 <form:form method="POST">
 	<h3>
-		<strong><ins>${p.name} Transaction</strong>
-		</ins>
+		${p.name} Transaction
 	</h3>
 	<c:if test="${fn:length(tlist) gt 0}">
 		<table style="cellspacing: 2; cellpadding: 2; border: 1; width: 100%">
@@ -35,7 +34,7 @@
 			</tbody>
 			<tbody>
 			<div>
-			<td><input type="submit" value="Back"/></td>	
+			<td><button><input type="submit" value="Back"/></button></td>	
 			</div>
 			</tbody>
 	</c:if>
