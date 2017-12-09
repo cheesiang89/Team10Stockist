@@ -62,7 +62,7 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value = "/catalog/product/view/{partNumber}", method = RequestMethod.GET)
+	@RequestMapping(value = "/catalogue/product/{partNumber}", method = RequestMethod.GET)
 	public ModelAndView productPage(@PathVariable String partNumber) {
 		
 		ModelAndView mav = new ModelAndView("product");
@@ -73,11 +73,11 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value = "/catalog/product/view/{partNumber}", method = RequestMethod.POST)
+	@RequestMapping(value = "/catalogue/product/{partNumber}", method = RequestMethod.POST)
 	public ModelAndView productPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
 			final RedirectAttributes redirectAttributes) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/home/catalog");
+		ModelAndView mav = new ModelAndView("redirect:/home/catalogue");
 		
 		return mav;
 	}

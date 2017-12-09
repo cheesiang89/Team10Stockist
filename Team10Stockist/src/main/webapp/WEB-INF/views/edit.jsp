@@ -3,7 +3,7 @@
 
 <h3>Product Edit Page</h3>
 <form:form method="POST" modelAttribute="product"
-	action="${pageContext.request.contextPath}/admin/edit/{partNumber}">
+	action="${pageContext.request.contextPath}/admin/product/edit/{partNumber}">
 	<table>
 		<tbody>
 			<tr>
