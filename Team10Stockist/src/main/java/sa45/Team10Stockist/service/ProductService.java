@@ -17,5 +17,6 @@ public interface ProductService {
 	Product changeProduct(Product p);
 
 	void removeProduct(Product p);
+	ArrayList<Product> findAllProductByCriteria(String[] criteria) ;
 
 }

@@ -9,10 +9,16 @@ import org.springframework.data.repository.query.Param;
 import sa45.Team10Stockist.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{
+	@Query("SELECT p FROM Product p WHERE "
+			+"(:search ='' OR ( p.partNumber LIKE concat('%', :search ,'%')OR p.name LIKE concat('%', :search ,'%')))"
+			  +"AND (:color = '' OR p.color LIKE concat('%', :color ,'%') )"
+		      + "AND (:manufacturer = '' OR p.manufacturer LIKE concat ('%', :manufacturer, '%'))")
+		      ArrayList<Product> findProductsByCriteria(
+		    		  @Param("search") String search,
+		    			  @Param("color") String color,
+		    		  @Param("manufacturer") String manufacturer);
 
-	@Query("SELECT p from Product p WHERE p.minimumInventoryQuantity > p.stockQuantity")
-	ArrayList<Product> findLowStockProducts();
-	
-//	@Query("SELECT p from Product p WHERE p.minimum_inventory_quantity > p.stock_quantity")
-//	int countOrderQuantity(@Param("eid") String eid);
+//	"SELECT c FROM customer c WHERE "
+//    + "(:name = '' OR c.name LIKE concat('%', :name ,'%'') "
+//    + "AND (:country = '' OR c.country LIKE concat ('%', :country, '%'')"
 }

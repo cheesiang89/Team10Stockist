@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import sa45.Team10Stockist.repository.ProductRepository;
@@ -41,18 +41,46 @@ public class BrowseCatalogueController {
 	private ProductService pService;
 
 	
+//	@RequestMapping(value = "/catalogue", method= RequestMethod.GET)
+//	public ModelAndView browseCataloguePage() {
+//		ModelAndView mav = new ModelAndView("login");
+//		//UserSession us = (UserSession) session.getAttribute("USERSESSION");
+//		//if (us.getSessionId() != null) {
+//		mav = new ModelAndView("browse-catalogue");
+//		ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProduct();
+//		mav.addObject("plist", productList);
+//		return mav;
+//		//}
+//		//return mav;
+//	}
 	@RequestMapping(value = "/catalogue", method= RequestMethod.GET)
 	public ModelAndView browseCataloguePage() {
-		ModelAndView mav = new ModelAndView("login");
+		//ModelAndView mav = new ModelAndView("login");
 		//UserSession us = (UserSession) session.getAttribute("USERSESSION");
 		//if (us.getSessionId() != null) {
-		mav = new ModelAndView("browse-catalogue");
+		ModelAndView mav = new ModelAndView("browse-catalogue");
 		ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProduct();
 		mav.addObject("plist", productList);
 		return mav;
-		//}
-		//return mav;
-	}
+		}
+	
+	@RequestMapping(value = "/catalogue", method= RequestMethod.POST)
+	public ModelAndView filteredCataloguePage(WebRequest request) {
+		String searchParameter= request.getParameter("search");	
+		String colorParameter = request.getParameter("color");	
+	
+	String manufacturerParameter = request.getParameter("manufacturer");	
+	String[] criteria = {searchParameter,colorParameter,manufacturerParameter};
+	
+		ModelAndView mav = new ModelAndView("browse-catalogue");
+		ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProductByCriteria(criteria);
+		mav.addObject("plist", productList);
+		/*mav.addObject("array", li);*/
+		return mav;
+		
+		}
+		
+	
 	
 	/*@RequestMapping(value = "/catalogue/delete/{partNumber}", method= RequestMethod.GET)
 	public ModelAndView deleteProduct(@PathVariable String partNumber, final RedirectAttributes redirectAttributes){
@@ -72,20 +100,20 @@ public class BrowseCatalogueController {
 	
 	@RequestMapping(value = "/catalogue/history/{partNumber}", method= RequestMethod.GET)
 	public ModelAndView historyProduct(@PathVariable String partNumber){
-		ModelAndView mav = new ModelAndView("history");
+		ModelAndView mav = new ModelAndView("historyjsp");
 		Product p = pService.findProduct(Integer.parseInt(partNumber));
 		/*ArrayList<TransactionDetail> tlist = (ArrayList<TransactionDetail>)p.getTransactionDetails();*/
 		List<TransactionDetail> tlist = p.getTransactionDetails();
 		
-		/*HashSet<Transaction> tset = new HashSet<Transaction>();*/
-		/*for(TransactionDetail t : tlist) {f
+		HashSet<Transaction> tset = new HashSet<Transaction>();
+		for(TransactionDetail t : tlist) {
 			tset.add(t.getTransaction());
-		}*/
+		}
 		
 		mav.addObject("p", p);
-		mav.addObject("tlist", tlist); //quantity
-		/*mav.addObject("tset", tset); //customerNane userName
-*/		return mav;
+		mav.addObject("tlist", tlist);
+		mav.addObject("tset", tset);
+		return mav;
 		
 	}
 	

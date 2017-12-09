@@ -61,4 +61,15 @@ public class ProductServiceImpl implements ProductService {
 	public void removeProduct(Product p) {
 		prepo.delete(p);
 	}
+	
+	@Transactional
+	public ArrayList<Product> findAllProductByCriteria(String[] criteria ) {
+		ArrayList<Product> plist = 
+				(ArrayList<Product>) prepo.findProductsByCriteria(
+						criteria[0],
+						criteria[1],
+						criteria[2]);
+		return plist;
+	}
+
 }
