@@ -28,4 +28,3 @@
 
 	<c:import url="/WEB-INF/views/ProductsList.jsp" />
 </body>
-</html>

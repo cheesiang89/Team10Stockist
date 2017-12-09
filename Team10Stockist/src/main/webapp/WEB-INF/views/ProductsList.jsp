@@ -30,6 +30,7 @@
 		t.append("<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/admin/add';\" name=\"" +p.getPartNumber() +"\"></td>");
 		t.append("<td><input type=\"button\" value=\"Update\" onclick=\"updateRow(this)\" name=\"" +p.getPartNumber() +"\"></td>");
 		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\" name=\"" +p.getPartNumber() +"\"></td>");
+		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\" name=\"" +p.getPartNumber() +"\"></td>");
 		t.append("</tr>");
 	}
 	t.append("</table>");

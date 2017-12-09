@@ -77,15 +77,15 @@ public class BrowseCatalogueController {
 		/*ArrayList<TransactionDetail> tlist = (ArrayList<TransactionDetail>)p.getTransactionDetails();*/
 		List<TransactionDetail> tlist = p.getTransactionDetails();
 		
-		HashSet<Transaction> tset = new HashSet<Transaction>();
-		for(TransactionDetail t : tlist) {
+		/*HashSet<Transaction> tset = new HashSet<Transaction>();*/
+		/*for(TransactionDetail t : tlist) {
 			tset.add(t.getTransaction());
-		}
+		}*/
 		
 		mav.addObject("p", p);
-		mav.addObject("tlist", tlist);
-		mav.addObject("tset", tset);
-		return mav;
+		mav.addObject("tlist", tlist); //quantity
+		/*mav.addObject("tset", tset); //customerNane userName
+*/		return mav;
 		
 	}
 	

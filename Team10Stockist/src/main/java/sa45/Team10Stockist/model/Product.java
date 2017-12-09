@@ -44,7 +44,7 @@ public class Product implements Serializable {
 	private double unitPrice;
 
 	//bi-directional many-to-one association to TransactionDetail
-	@OneToMany(mappedBy="product")
+	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<TransactionDetail> transactionDetails;
 
 	public Product() {
