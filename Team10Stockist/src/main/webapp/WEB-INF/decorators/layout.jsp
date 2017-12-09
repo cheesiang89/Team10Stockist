@@ -14,10 +14,6 @@
 			<tr>
 			<td>
 				<div>
-					<h3>
-						<
-						<spring:message code="${bodyTitle}" />
-					</h3>
 					<decorator:body />
 				</div>
 			</td>
