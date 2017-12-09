@@ -72,13 +72,13 @@ public class BrowseCatalogueController {
 	
 	@RequestMapping(value = "/catalogue/history/{partNumber}", method= RequestMethod.GET)
 	public ModelAndView historyProduct(@PathVariable String partNumber){
-		ModelAndView mav = new ModelAndView("historyjsp");
+		ModelAndView mav = new ModelAndView("history");
 		Product p = pService.findProduct(Integer.parseInt(partNumber));
 		/*ArrayList<TransactionDetail> tlist = (ArrayList<TransactionDetail>)p.getTransactionDetails();*/
 		List<TransactionDetail> tlist = p.getTransactionDetails();
 		
 		/*HashSet<Transaction> tset = new HashSet<Transaction>();*/
-		/*for(TransactionDetail t : tlist) {
+		/*for(TransactionDetail t : tlist) {f
 			tset.add(t.getTransaction());
 		}*/
 		
