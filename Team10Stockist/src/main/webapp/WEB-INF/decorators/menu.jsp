@@ -11,7 +11,7 @@
 						htmlEscape="true" /> <a href="${clist}"> <spring:message
 							code="menu.admin.clist" />
 				</a></li>
-				<li><spring:url value="/admin/reorder" var="rlist"
+				<li><spring:url value="/admin/report" var="rlist"
 						htmlEscape="true" /> <a href="${rlist}"> <spring:message
 							code="menu.admin.rlist" />
 				</a></li>
