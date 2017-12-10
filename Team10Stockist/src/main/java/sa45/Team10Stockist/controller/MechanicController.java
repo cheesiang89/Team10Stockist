@@ -40,9 +40,14 @@ public class MechanicController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/usage/{customerId}", method= RequestMethod.GET)
+	@RequestMapping(value = "/usage/customer/{customerId}", method= RequestMethod.GET)
 	public @ResponseBody String findCustomerName(@PathVariable String customerId){
 		return cservice.findCustomer(Integer.parseInt(customerId)).getCustomerName();
+	}
+	
+	@RequestMapping(value = "/usage/part/{partNumber}", method= RequestMethod.GET)
+	public @ResponseBody String findProductName(@PathVariable String partNumber){
+		return pservice.findProduct(Integer.parseInt(partNumber)).getName();
 	}
 	
 	/*@RequestMapping(value = "/usage",method = RequestMethod.POST)

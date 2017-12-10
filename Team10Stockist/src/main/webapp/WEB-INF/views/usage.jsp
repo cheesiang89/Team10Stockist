@@ -22,7 +22,7 @@
 			</select></td>
 			<td><spring:message code="fieldLabel.partNumber" /></td>
 			<td colspan="3">
-			<select name='selectPart' id="selectPart">
+			<select name='selectPart' id="selectPart" onchange = "showPartName()">
 					<option value="">Select Part Number</option>
 					<c:forEach items="${productlist}" var="product">
 						<option value="${product.partNumber}">${product.partNumber}</option>
@@ -35,6 +35,10 @@
 			<td colspan="3">
 				<input id="txtcName" size="25"/>
 			</td>
+			<td><spring:message code="fieldLabel.partName" /></td>
+			<td colspan="3">
+				<input id="txtpName" size="25"/>
+			</td>
 		</tr>
 		
 	</table>
@@ -44,8 +48,17 @@
 function showCustomerName() {
 	var a = selectCustomer.options[selectCustomer.selectedIndex].value;
 	var txtcName = document.getElementById('txtcName');
-	var searchurl="/team10stockist/mechanic/usage/"+a;
+	var searchurl="/team10stockist/mechanic/usage/customer/"+a;
 	$.ajax({url: searchurl, success:function(result){txtcName.value =result}});
 }
+
+function showPartName() {
+ 	var a = selectPart.options[selectPart.selectedIndex].value;
+	var txtpName = document.getElementById('txtpName');
+	var searchurl="/team10stockist/mechanic/usage/part/"+a;
+	$.ajax({url: searchurl, success:function(result){txtpName.value =result}}); 
+}
+
+
 </script>
 </body>
