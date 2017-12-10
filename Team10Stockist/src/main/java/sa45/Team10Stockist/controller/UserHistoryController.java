@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,8 @@ import sa45.Team10Stockist.model.Transaction;
 import sa45.Team10Stockist.model.TransactionDetail;
 import sa45.Team10Stockist.service.ProductService;
 
+@RequestMapping(value = "/home")
+@Controller
 public class UserHistoryController {
 	
 	@Autowired
@@ -22,7 +25,7 @@ public class UserHistoryController {
 	
 	@RequestMapping(value = "/catalogue/history/{partNumber}", method= RequestMethod.GET)
 	public ModelAndView historyProduct(@PathVariable String partNumber){
-		ModelAndView mav = new ModelAndView("historyjsp");
+		ModelAndView mav = new ModelAndView("history");
 		Product p = pService.findProduct(Integer.parseInt(partNumber));
 		List<TransactionDetail> tlist = p.getTransactionDetails();
 		
