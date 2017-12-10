@@ -9,7 +9,11 @@
 
 				<li><spring:url value="/home/catalogue" var="clist"
 						htmlEscape="true" /> <a href="${clist}"> <spring:message
-							code="menu.admin.clist" />
+							code="menu.clist" />
+				</a></li>
+				<li><spring:url value="/admin/product/add" var="alist"
+						htmlEscape="true" /> <a href="${alist}"> <spring:message
+							code="menu.admin.alist" />
 				</a></li>
 				<li><spring:url value="/admin/report" var="rlist"
 						htmlEscape="true" /> <a href="${rlist}"> <spring:message
@@ -23,7 +27,7 @@
 			<c:when test="${sessionScope.USERSESSION.user.role eq 'mechanic' }">
 				<li><spring:url value="/home/catalogue" var="clist"
 						htmlEscape="true" /> <a href="${clist}"> <spring:message
-							code="menu.admin.clist" />
+							code="menu.clist" />
 				</a></li>
 				<li><spring:url value="/mechanic/usage" var="ulist"
 						htmlEscape="true" /> <a href="${ulist}"> <spring:message

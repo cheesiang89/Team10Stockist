@@ -35,7 +35,7 @@ String userRole = ((UserSession)session.getAttribute("USERSESSION")).getUser().g
 				
 		t.append("<td><input type=\"button\" value=\"History\" onclick=\"location.href='/team10stockist/home/catalogue/history/"+p.getPartNumber() +"'\"></td>");
 		t.append("<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/home/catalogue/product/"+p.getPartNumber() +"'\"></td>");
-		if (userRole.toUpperCase() == "ADMIN"){
+		if (userRole.equalsIgnoreCase("ADMIN")){
 		t.append("<td><input type=\"button\" value=\"Edit\" onclick=\"location.href='/team10stockist/admin/product/edit/"+p.getPartNumber() +"'\"></td>");
 		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\" name=\"" +p.getPartNumber() +"\"></td>");
 		}
