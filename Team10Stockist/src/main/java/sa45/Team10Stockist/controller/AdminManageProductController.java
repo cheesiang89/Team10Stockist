@@ -18,7 +18,7 @@ import sa45.Team10Stockist.service.ProductService;
 
 @RequestMapping(value = "/admin")
 @Controller
-public class AdminController {
+public class AdminManageProductController {
 
 	@Autowired
 	ProductService pservice;

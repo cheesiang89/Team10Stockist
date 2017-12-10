@@ -19,10 +19,8 @@ import sa45.Team10Stockist.service.UserService;
 
 @RequestMapping(value = "/home")
 @Controller
-public class UserController {
+public class UserLoginController {
 
-	@Autowired
-	ProductService pservice;
 	
 	@Autowired
 	private UserService uService;
@@ -62,22 +60,4 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value = "/catalogue/product/{partNumber}", method = RequestMethod.GET)
-	public ModelAndView productPage(@PathVariable String partNumber) {
-		
-		ModelAndView mav = new ModelAndView("product");
-		int pnum = Integer.parseInt(partNumber);
-		Product product = pservice.findProduct(pnum);
-		mav.addObject("product", product);
-		return mav;
-
-	}
-	
-	@RequestMapping(value = "/catalogue/product/{partNumber}", method = RequestMethod.POST)
-	public ModelAndView productPage(@ModelAttribute Product product) {
-		
-		ModelAndView mav = new ModelAndView("redirect:/home/catalogue");
-		
-		return mav;
-	}
 }
