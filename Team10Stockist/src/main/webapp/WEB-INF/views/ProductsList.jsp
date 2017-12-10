@@ -1,12 +1,18 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="sa45.Team10Stockist.model.Product"%>
+<%@page import="sa45.Team10Stockist.controller.UserSession"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="java.sql.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <%
+String userRole = ((UserSession)session.getAttribute("USERSESSION")).getUser().getRole();
 	ArrayList<Product> plist = (ArrayList<Product>) request.getAttribute("plist");
 	PrintWriter print = response.getWriter();
 	StringBuffer t = new StringBuffer();
+	t.append("<p>"+userRole.toUpperCase()+"</p>");
 	t.append("<table id=\"products\">");
 	t.append("<tr >");
 	t.append("<th style=' padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #45c693;color: white;'>Part Number</th>");
@@ -26,10 +32,14 @@
 		t.append("<td>" + p.getDimension() + "</td>");
 		t.append("<td>" + p.getUnitPrice() + "</td>");
 		/* t.append("<td><a href=\"http://google.com\" class=\"button\">Go1 to Google</a></td>"); */
+				
 		t.append("<td><input type=\"button\" value=\"History\" onclick=\"location.href='/team10stockist/home/catalogue/history/"+p.getPartNumber() +"'\"></td>");
 		t.append("<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/home/catalogue/product/"+p.getPartNumber() +"'\"></td>");
+		if (userRole.toUpperCase() == "ADMIN"){
 		t.append("<td><input type=\"button\" value=\"Edit\" onclick=\"location.href='/team10stockist/admin/product/edit/"+p.getPartNumber() +"'\"></td>");
 		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\" name=\"" +p.getPartNumber() +"\"></td>");
+		}
+		
 		t.append("</tr>");
 	}
 	t.append("</table>");
