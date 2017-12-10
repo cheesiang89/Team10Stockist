@@ -16,7 +16,7 @@ public class Product implements Serializable {
 
 	@Id
 	@Column(name="part_number")
-	private int partNumber;
+	private Integer partNumber;
 
 	private String color;
 
@@ -27,10 +27,10 @@ public class Product implements Serializable {
 	private String manufacturer;
 
 	@Column(name="minimum_inventory_quantity")
-	private int minimumInventoryQuantity;
+	private Integer minimumInventoryQuantity;
 
 	@Column(name="minimum_reorder_quantity")
-	private int minimumReorderQuantity;
+	private Integer minimumReorderQuantity;
 
 	private String name;
 
@@ -38,10 +38,10 @@ public class Product implements Serializable {
 	private String shelfLocation;
 
 	@Column(name="stock_quantity")
-	private int stockQuantity;
+	private Integer stockQuantity;
 
 	@Column(name="unit_price")
-	private double unitPrice;
+	private Double unitPrice;
 
 	//bi-directional many-to-many association to Supplier
 	@ManyToMany(mappedBy="products")
@@ -54,11 +54,11 @@ public class Product implements Serializable {
 	public Product() {
 	}
 
-	public int getPartNumber() {
+	public Integer getPartNumber() {
 		return this.partNumber;
 	}
 
-	public void setPartNumber(int partNumber) {
+	public void setPartNumber(Integer partNumber) {
 		this.partNumber = partNumber;
 	}
 
@@ -94,19 +94,19 @@ public class Product implements Serializable {
 		this.manufacturer = manufacturer;
 	}
 
-	public int getMinimumInventoryQuantity() {
+	public Integer getMinimumInventoryQuantity() {
 		return this.minimumInventoryQuantity;
 	}
 
-	public void setMinimumInventoryQuantity(int minimumInventoryQuantity) {
+	public void setMinimumInventoryQuantity(Integer minimumInventoryQuantity) {
 		this.minimumInventoryQuantity = minimumInventoryQuantity;
 	}
 
-	public int getMinimumReorderQuantity() {
+	public Integer getMinimumReorderQuantity() {
 		return this.minimumReorderQuantity;
 	}
 
-	public void setMinimumReorderQuantity(int minimumReorderQuantity) {
+	public void setMinimumReorderQuantity(Integer minimumReorderQuantity) {
 		this.minimumReorderQuantity = minimumReorderQuantity;
 	}
 
@@ -126,19 +126,19 @@ public class Product implements Serializable {
 		this.shelfLocation = shelfLocation;
 	}
 
-	public int getStockQuantity() {
+	public Integer getStockQuantity() {
 		return this.stockQuantity;
 	}
 
-	public void setStockQuantity(int stockQuantity) {
+	public void setStockQuantity(Integer stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
 
-	public double getUnitPrice() {
+	public Double getUnitPrice() {
 		return this.unitPrice;
 	}
 
-	public void setUnitPrice(double unitPrice) {
+	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
