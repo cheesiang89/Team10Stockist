@@ -44,18 +44,19 @@ public class UserLoginController {
         return mav;
 		}
 		else{
-			User u = uService.authenticate(user.getEmail(), user.getPassword());
+			User u = uService.authenticate(user.getName(), user.getPassword());
 			us.setUser(u);
 			us.setSessionId(session.getId());
 			mav = new ModelAndView("redirect:/home/catalogue");
-			session.setAttribute("USERSESSION", us);  
+			  
 		}
+		session.setAttribute("USERSESSION", us);
 		return mav;
 	}
 	
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
-		
+		session.invalidate();
 		return "redirect:/home";
 
 	}
