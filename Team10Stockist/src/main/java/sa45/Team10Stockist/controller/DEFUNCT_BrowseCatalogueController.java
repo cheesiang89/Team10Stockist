@@ -1,3 +1,4 @@
+package sa45.Team10Stockist.controller;
 /*package sa45.Team10Stockist.controller;
 
 import java.io.IOException;

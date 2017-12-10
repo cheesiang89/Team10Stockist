@@ -1,78 +1,64 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<title>IMS - New Usage Form</title>
-<h1>IMS - New Usage Form</h1>
-<form:form method="POST" modelAttribute="usage"
-	action="${pageContext.request.contextPath}/mechanic/usage">
+<form:form method="POST">
+
+<body>
+<h3>IMS - New Usage Form</h3>
+	<c:if test="${fn:length(customerlist) gt 0}"></c:if>
+	<c:if test="${fn:length(productlist) gt 0}"></c:if>
 	<table>
 		<tr>
 			<td><spring:message code="fieldLabel.customerId" /></td>
-			<td colspan="3"><form:input type="text" size="30" path="customerId"/></td>
-			<td colspan="3"><form:select size="30" path="customerId" items="${customerList}" /></td>
+			<td colspan="3"><select name='selectCustomer'
+				id="selectCustomer" onchange = "showCustomerName()">
+					<option value="">Select Customer ID</option>
+					<c:forEach items="${customerlist}" var="customer">
+						<option value="${customer.customerId}">${customer.customerId}</option>
+					</c:forEach>
+			</select></td>
 			<td><spring:message code="fieldLabel.partNumber" /></td>
-			<td colspan="3"><form:input type="text" size="30" path="partNumber"/></td>
-			<td colspan="3"><form:select size="30" path="partNumber"
-					items="${productList}" /></td>
+			<td colspan="3">
+			<select name='selectPart' id="selectPart" onchange = "showPartName()">
+					<option value="">Select Part Number</option>
+					<c:forEach items="${productlist}" var="product">
+						<option value="${product.partNumber}">${product.partNumber}</option>
+					</c:forEach>
+			</select>	
+			</td>
 		</tr>
 		<tr>
 			<td><spring:message code="fieldLabel.customerName" /></td>
-			<td colspan="3"><form:input type="text" size="30" path="customerName" readonly="true" /></td>
+			<td colspan="3">
+				<input id="txtcName" size="25"/>
+			</td>
 			<td><spring:message code="fieldLabel.partName" /></td>
-			<td><form:input size="30" path="partName" readonly="true" /></td>
-			<td align="right"><form:button value="Add"/></td>
-			<td align="right"><form:button value="Add"
-					onclick="addRow('tableID')" /></td>
+			<td colspan="3">
+				<input id="txtpName" size="25"/>
+			</td>
 		</tr>
-		<tr>
-			<td><spring:message code="fieldLabel.date" /></td>
-			<td><form:input size="16" path="date" id="datepicker1" readonly="true"  /></td>
-			<td><spring:message code="fieldLabel.quantity" /></td>
-			<td><form:input size="16" path="quantity" /></td>
-			<td align="right"><form:button value="Clear"/></td>
-			<td align="right"><form:button value="Clear"
-					onclick="clearFields()" /></td>
-			<!-- Need to do validation to check quantity against inventory  -->
-		</tr>
+		
 	</table>
-	<table id="partTable" border="1">
-		<tr>
-		<th>No.</th>
-		<th>Part ID</th>
-		<th>Part Name</th>
-		<th>Quantity</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>123</td>
-			<td>tyre</td>
-			<td>1</td>
-		</tr>
-	</table>
-
-<table>
-	<tr>
-		<td>&nbsp;</td>
-		<td colspan="2" align="left"><br></br> <form:button type="submit">
-				<img
-					src="${pageContext.request.contextPath}/image/button_submit.gif"
-					alt="" align="middle">
-			</form:button>&nbsp; <a href="javascript:history.back();"> <img
-				src="${pageContext.request.contextPath}/image/button_cancel.gif"
-				alt="" align="middle" border="0">
-		</a></td>
-	</tr>
-</table>
-
-
-
-
-
-
-
-
-
-
 </form:form>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+function showCustomerName() {
+	var a = selectCustomer.options[selectCustomer.selectedIndex].value;
+	var txtcName = document.getElementById('txtcName');
+	var searchurl="/team10stockist/mechanic/usage/customer/"+a;
+	$.ajax({url: searchurl, success:function(result){txtcName.value =result}});
+}
+
+function showPartName() {
+ 	var a = selectPart.options[selectPart.selectedIndex].value;
+	var txtpName = document.getElementById('txtpName');
+	var searchurl="/team10stockist/mechanic/usage/part/"+a;
+	$.ajax({url: searchurl, success:function(result){txtpName.value =result}}); 
+}
+
+
+</script>
+</body>
