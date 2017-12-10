@@ -18,7 +18,7 @@
 		</h1>
 		<h2>
 			<!-- user name from session state -->
-			User Name
+			${sessionScope.USERSESSION.user.name}
 		</h2>
 	</div>
 
