@@ -25,7 +25,7 @@ public class Supplier implements Serializable {
 	private String supplierName;
 
 	//bi-directional many-to-many association to Product
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 		name="supplier_catalog"
 		, joinColumns={
