@@ -1,8 +1,8 @@
-	<!-- ======== Header ======== -->
+	<%-- ======== Header ======== --%>
 <div>
 		<%@include file="header.jsp"%>
 </div>
-	<!-- ======== Body ======== -->
+	<%-- ======== Body ======== --%>
 	<table style="width: 100%">
 		<tr>
 			<td style="width: 180; border: 1" valign="top">
@@ -18,6 +18,6 @@
 		</tr>
 	</table>
 
-	<!-- ======== Footer ======== -->
+	<%-- ======== Footer ======== --%>
 	<%@include file="footer.jsp"%>
 

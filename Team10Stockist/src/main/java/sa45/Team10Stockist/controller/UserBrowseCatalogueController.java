@@ -35,12 +35,12 @@ public class UserBrowseCatalogueController {
 	public ModelAndView filteredCataloguePage(WebRequest request) {
 		String searchParameter= request.getParameter("search");	
 		String colorParameter = request.getParameter("color");	
-	
-	String manufacturerParameter = request.getParameter("manufacturer");	
-	String[] criteria = {searchParameter,colorParameter,manufacturerParameter};
+		String manufacturerParameter = request.getParameter("manufacturer");	
+	    String[] criteria = {searchParameter,colorParameter,manufacturerParameter};
 	
 		ModelAndView mav = new ModelAndView("browse-catalogue");
 		ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProductByCriteria(criteria);
+		//ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProductByCriteria(new String[] {"","",""});
 		mav.addObject("plist", productList);
 		return mav;
 		
