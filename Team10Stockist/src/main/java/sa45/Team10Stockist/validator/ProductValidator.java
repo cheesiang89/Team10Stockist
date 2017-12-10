@@ -22,7 +22,7 @@ public class ProductValidator implements Validator{
 		// TODO Auto-generated method stub
 		Product product = (Product) arg0;
 		if(StringUtils.isEmpty(product.getColor())) {
-			arg1.rejectValue("color", "error.color");
+			arg1.rejectValue("color", "Color is required");
 		}
 
 		if(StringUtils.isEmpty(product.getName())) {
