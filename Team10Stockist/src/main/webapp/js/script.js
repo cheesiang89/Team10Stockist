@@ -1,4 +1,4 @@
-$(document).ready(function(){
+
 	function filt() {
 		//window.alert("s");
 		const inputs = $(".data")
@@ -49,5 +49,3 @@ $(document).ready(function(){
 		request.onreadystatechange = function(){taskFinish(btn);};
 		request.open("GET", url, true);
 		request.send(); */
-
-	});
