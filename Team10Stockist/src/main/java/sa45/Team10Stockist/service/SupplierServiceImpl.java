@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import sa45.Team10Stockist.model.Product;
 import sa45.Team10Stockist.model.Supplier;
 import sa45.Team10Stockist.repository.SupplierRepository;
 
@@ -61,4 +62,5 @@ public class SupplierServiceImpl implements SupplierService {
 	public void removeSupplier(Supplier s) {
 		srepo.delete(s);
 	}
+	
 }
