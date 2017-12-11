@@ -5,10 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <form:form method="POST">
-.cellStyle{
-     border: 1 
-     column-span:5
-}
+
 <body>
 <h3>IMS - New Usage Form</h3>
 	<c:if test="${fn:length(customerlist) gt 0}"></c:if>
@@ -25,7 +22,7 @@
 			</select></td>
 			<td><spring:message code="fieldLabel.partNumber" /></td>
 			<td colspan="3">
-			<select name='selectPart' id="selectPart" onchange ="showPartName()">
+			<select name='selectPart' id="selectPart" onchange ="showPartDetails()">
 					<option value="">Select Part Number</option>
 					<c:forEach items="${productlist}" var="product">
 						<option value="${product.partNumber}">${product.partNumber}</option>
@@ -50,10 +47,14 @@
 			<td colspan="3">
 				<input id="txtQty" size="25" />
 			</td>
+			<td><spring:message code="fieldLabel.unitprice" /></td>
+			<td colspan="3">
+				<input id="txtUprice" size="25" readonly= "readonly"/>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="right"><input type="reset" value="Clear" onclick="clearText()"></td>
-			<td colspan="5" align="right"><button id="Add" onclick="addItemAndRow()">Add</button></td>
+			<td colspan="5" align="right"><input type="button" id="Add" value="Add" onclick="addItemAndRow()"/></td>
 		</tr>
 	</table>
 	<table>
@@ -69,22 +70,23 @@
 		</table>
 	<table id="transTable" border="1">
 			<tr>
-				<th colspan="5">Part Number</th>
-				<th colspan="5">Part Name</th>
-				<th colspan="5">Quantity</th>
-				<th colspan="5"></th>
-			</tr>
-			<tr>
-				<td colspan="5"><input id="txtTtpid" style="border:0"/></td>
-				<td colspan="5"><input id="txtTtpName" style="border:0" /></td>
-				<td colspan="5"><input id="txtTtQty" style="border:0" /></td>
-				<td colspan="5"><button id="btnDelete" onclick= "deleteThisRow(this)"></button></td>
+				<th>Part Number</th>
+				<th>Part Name</th>
+				<th>Quantity</th>
+				<th>Unit Price</th>
+				<th>Total Price</th>
+				<th></th>
 			</tr>
 	</table>
 	<table>
 	<tr>
-		<td colspan="4" align="right"><button type="submit" value="Submit">Submit</button></td>
-		<td colspan="5" align="right"><button id="Cancel" id="Cancel" onclick="location.href='/team10stockist/home/catalogue'">Cancel</button></td>
+		<td colspan="10" align="left"><input type="button" value="Submit"/></td>
+		<td colspan="10"></td>
+		<td colspan="10"></td>
+		<td colspan="10"></td>
+		<td colspan="10"></td>
+		<td colspan="10"></td>
+		<td colspan="10" align="right"><input type="button" id="Cancel" value="Cancel" onclick="location.href='/team10stockist/home/catalogue'"/></td>
 		</tr>
 	</table>
 </form:form>
@@ -97,11 +99,14 @@ function showCustomerName() {
 	$.ajax({url: searchurl, success:function(result){txtcName.value =result}});
 }
 
-function showPartName() {
+function showPartDetails() {
  	var a = selectPart.options[selectPart.selectedIndex].value;
 	var txtpName = document.getElementById('txtpName');
-	var searchurl="/team10stockist/mechanic/usage/part/"+a;
-	$.ajax({url: searchurl, success:function(result){txtpName.value =result}}); 
+	var searchurl1="/team10stockist/mechanic/usage/part/"+a;
+	$.ajax({url: searchurl1, success:function(result1){txtpName.value = result1}}); 
+	var txtUprice = document.getElementById('txtUprice');
+	var searchurl2="/team10stockist/mechanic/usage/part/price/"+a;
+	$.ajax({url: searchurl2, success:function(result2){txtUprice.value =result2}}); 
 }
 
 function clearText()  
@@ -111,39 +116,48 @@ function clearText()
     document.getElementById('selectPart').selectedIndex = 0;
     document.getElementById('txtcName').value = "";
     document.getElementById('txtpName').value = "";
-   // document.getElementById('transTime').valueAsDate =null;
-}  
-
-function addItemAndRow(){
-	var a = selectPart.options[selectPart.selectedIndex].value;
-	document.getElementById('txtTtpid').value = a ;
-	var b = document.getElementById('txtpName').value;
-	document.getElementById('txtTtpName').value =b;
-	var c = document.getElementById('txtQty').value;
-	document.getElementById('txtTtQty').value = c;
-	var table = document.getElementById("transTable");
-	var row = table.insertRow(2);
-	var cell1=row.insertCell(0);
-	cell1.className= 'cellStyle';
-    var cell2=row.insertCell(1);
-    cell2.className= 'cellStyle';
-    var cell3=row.insertCell(2);
-    cell3.className= 'cellStyle';
-    clearText();
+    document.getElementById('txtUprice').value = "";
 }
+
+var index=1;
+function addItemAndRow(){
+	if(txtQty.value == ""){
+		window.alert("Part quantity cannot be empty.");
+	}
+	else {
+		var t = $("#transTable");
+		t.append("<tr><td><input id=\"txtTtpid"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
+				"<td><input id=\"txtTtpName"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
+				"<td><input id=\"txtTtQty"+index+"\" style=\"border:0\"/></td>"+
+				"<td><input id=\"txtTtPrice"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
+				"<td><input id=\txtTtSubTotal"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
+				"<td><input type=\"button\" id=\"btnDlt"+index+"\" class=\"Delete\" value=\"Delete\" onclick= \"deleteThisRow(this)\"/></td></tr>");
+			var a = selectPart.options[selectPart.selectedIndex].value;
+			var aId = "txtTtpid"+index;
+			document.getElementById(aId).value = a;
+			var b = document.getElementById('txtpName').value;
+			var bId = "txtTtpName"+index;
+			document.getElementById(bId).value = b;
+			var c = document.getElementById('txtQty').value;
+			var cId = "txtTtQty"+index;
+			document.getElementById(cId).value = c; 
+			var d = document.getElementById('txtUprice').value;
+			var dId = "txtTtPrice"+index;
+			document.getElementById(dId).value = d; 		
+		index++;
+	    document.getElementById('txtQty').value = "";
+	    document.getElementById('selectPart').selectedIndex = 0;
+	    document.getElementById('txtpName').value = "";
+	    document.getElementById('txtUprice').value = "";	
+	}
+}
+
 
 function deleteThisRow(btn){
-	const no =btn.parentNode.parentNode.getElementsByClassName("partNumber")[0].innerHTML;
-	const name =btn.parentNode.parentNode.getElementsByClassName("name")[0].innerHTML;
-	if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) { 
-		const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
-		$.ajax({url: deleteurl});
-		var row = btn.parentNode.parentNode;
-		row.parentNode.removeChild(row);
-		
+	var row = btn.parentNode.parentNode;
+	row.parentNode.removeChild(row);
 	
-	
-}
+	}   
 
 </script>
 </body>

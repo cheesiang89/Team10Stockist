@@ -50,12 +50,21 @@ public class MechanicController {
 		return pservice.findProduct(Integer.parseInt(partNumber)).getName();
 	}
 	
-	/*@RequestMapping(value = "/usage",method = RequestMethod.POST)
+	@RequestMapping(value = "/usage/part/price/{partNumber}", method= RequestMethod.GET)
+	public @ResponseBody String findProductPrice(@PathVariable String partNumber){
+		Double unitPrice = pservice.findProduct(Integer.parseInt(partNumber)).getUnitPrice();
+		String strUnitPrice = unitPrice.toString();
+		return strUnitPrice;
+	}
+	
+	
+	
+	@RequestMapping(value = "/usage",method = RequestMethod.POST)
 	public ModelAndView postDelivery(BindingResult result, final RedirectAttributes redirectAttributes) {
 	
 		
 		return null;
 	}
-*/
+
 	
 }
