@@ -138,20 +138,24 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-
-		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-		localeChangeInterceptor.setParamName("lang");
-		registry.addInterceptor(localeChangeInterceptor);
+		registry.addInterceptor(localeInterceptor());
 	}
 
-	@Bean
-	public LocaleResolver localeResolver() {
-
-		CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-		cookieLocaleResolver.setDefaultLocale(StringUtils
-				.parseLocaleString("en"));
-		return cookieLocaleResolver;
-	}
+//	@Bean
+//	public LocaleResolver localeResolver() {
+//
+//		CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+//		cookieLocaleResolver.setDefaultLocale(StringUtils
+//				.parseLocaleString("en"));
+//		cookieLocaleResolver.setCookieMaxAge(3600);
+//		return cookieLocaleResolver;
+//	}
+	 @Bean
+	    public LocaleChangeInterceptor localeInterceptor(){
+	        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+	        interceptor.setParamName("lang");
+	        return interceptor;
+	    }
 
 	
 }
