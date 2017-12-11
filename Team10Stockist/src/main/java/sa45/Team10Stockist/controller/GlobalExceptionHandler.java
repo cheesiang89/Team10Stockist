@@ -18,21 +18,23 @@ public class GlobalExceptionHandler {
 	    }
 
 
-	    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	    @ExceptionHandler(value = Exception.class)
-	    public String handleAllException(Exception e) {
-
-	        System.out.println("A unknow Exception Ocurred: " + e);
-
-	        return "error";
-	    }
-
-
 	    @ExceptionHandler(ResourceNotFoundException.class)
 	    @ResponseStatus(HttpStatus.NOT_FOUND)
 	    public String handle(NoHandlerFoundException ex) {
+	        System.out.println("404 error: " + ex);
+	        return "error";
+	    }
+	    
+
+
+	    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	    @ExceptionHandler(value = Exception.class)
+	    public String handleAllException(Exception ex) {
+
+	        System.out.println("A unknow Exception Ocurred: " + ex);
 
 	        return "error";
 	    }
+
 
 }

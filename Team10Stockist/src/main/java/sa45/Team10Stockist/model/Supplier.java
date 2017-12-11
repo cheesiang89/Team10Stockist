@@ -2,6 +2,9 @@ package sa45.Team10Stockist.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.transaction.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
