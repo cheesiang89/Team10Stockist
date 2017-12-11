@@ -16,6 +16,7 @@ public class Product implements Serializable {
 
 	@Id
 	@Column(name="part_number")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer partNumber;
 
 	private String color;
