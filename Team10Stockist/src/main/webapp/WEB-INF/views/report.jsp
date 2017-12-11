@@ -57,6 +57,7 @@
 				}
 				subtotal = actualOrder * p.getUnitPrice();
 			}else{
+				actualOrder=0;
 			}
 			t.append("<td>" + actualOrder + "</td>");
 			total= total + subtotal;
