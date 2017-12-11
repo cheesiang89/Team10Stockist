@@ -63,7 +63,10 @@ h3 {
 	text-transform: uppercase;
 	border-bottom: 1px solid rgba(53,86,129, 0.3);
 	text-decoration:underline;
-	
+}
+
+#error{
+	background-image: url("image/error.jpg")
 }
 
 h4 {

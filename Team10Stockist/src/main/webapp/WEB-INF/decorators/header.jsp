@@ -18,7 +18,7 @@
 		</h1>
 		<h2 id="userName">
 			<!-- user name from session state -->
-			Welcome, ${sessionScope.USERSESSION.user.name}!
+			${sessionScope.USERSESSION.user.name}
 		</h2>
 	</div>
 
