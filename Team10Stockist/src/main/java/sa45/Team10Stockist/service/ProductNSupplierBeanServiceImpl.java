@@ -73,10 +73,12 @@ public class ProductNSupplierBeanServiceImpl implements ProductNSupplierBeanServ
 	//For counting the total price for each supplier in the reorder report
 	
 	@Transactional
-	public double getTotalReorderPrice() {
+	public double getTotalReorderPriceBySupplier(int supplierid) {
 		double totalReorderPrice = 0;
 		for (ProductNSupplierBean comboBean : getBean()) {
-			totalReorderPrice += comboBean.getPrice();
+			if (comboBean.getSupplierId() == supplierid) {
+				totalReorderPrice += comboBean.getPrice();
+			}
 		}
 		return totalReorderPrice;
 	}
