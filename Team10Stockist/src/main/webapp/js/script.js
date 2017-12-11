@@ -1,54 +1,51 @@
-$(document).ready(function(){
-alert("s");
 
-	});
-function filt() {
-	//window.alert("s");
-	const inputs = $(".data")
-	const color = $("#color").val();
-	const manufacturer = $("#manufacturer").val();
-	const searchtext = $("#searchText").val();
-	for (let i = 0; i < inputs.length; i++) {
-		inputs[i].style.display = "";
-	}
-	for (let i = 0; i < inputs.length; i++) {
-		const c = inputs[i].getElementsByClassName("color")[0].innerHTML;
-		const m = inputs[i].getElementsByClassName("manufacturer")[0].innerHTML;
-		const n = inputs[i].getElementsByClassName("partNumber")[0].innerHTML;
-		if (color != "All" & c != color) {
-			inputs[i].style.display = "none";
-		} else if (manufacturer != "All" & m != manufacturer) {
-			inputs[i].style.display = "none";
-		}else if (!n.includes(searchtext)){
-			inputs[i].style.display = "none";
+	function filt() {
+		//window.alert("s");
+		const inputs = $(".data")
+		const color = $("#color").val();
+		const manufacturer = $("#manufacturer").val();
+		const searchtext = $("#searchText").val();
+		for (let i = 0; i < inputs.length; i++) {
+			inputs[i].style.display = "";
+		}
+		for (let i = 0; i < inputs.length; i++) {
+			const c = inputs[i].getElementsByClassName("color")[0].innerHTML;
+			const m = inputs[i].getElementsByClassName("manufacturer")[0].innerHTML;
+			const n = inputs[i].getElementsByClassName("partNumber")[0].innerHTML;
+			if (color != "All" & c != color) {
+				inputs[i].style.display = "none";
+			} else if (manufacturer != "All" & m != manufacturer) {
+				inputs[i].style.display = "none";
+			}else if (!n.includes(searchtext)){
+				inputs[i].style.display = "none";
+			}
 		}
 	}
-}
-function deleteRow(btn) {
-	/*window.alert(window.location.pathname);*/
-	//window.alert("s");
-	const no =btn.parentNode.parentNode.getElementsByClassName("partNumber")[0].innerHTML;
-	const name =btn.parentNode.parentNode.getElementsByClassName("name")[0].innerHTML;
-	if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) { 
-		const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
-		$.ajax({url: deleteurl});
-		var row = btn.parentNode.parentNode;
-		row.parentNode.removeChild(row);
-		
-}
+	function deleteRow(btn) {
+		/*window.alert(window.location.pathname);*/
+		//window.alert("s");
+		const no =btn.parentNode.parentNode.getElementsByClassName("partNumber")[0].innerHTML;
+		const name =btn.parentNode.parentNode.getElementsByClassName("name")[0].innerHTML;
+		if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) { 
+			const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
+			$.ajax({url: deleteurl});
+			var row = btn.parentNode.parentNode;
+			row.parentNode.removeChild(row);
+			
 	}
-	/*/
+		}
+		/*/
 /*
-		var request = XMLHttpRequest();
-	var url = "DeleteProductRow?partNumber=" + btn.name;
+ 		var request = XMLHttpRequest();
+		var url = "DeleteProductRow?partNumber=" + btn.name;
 
-	var inputs = document.getElementsByTagName("INPUT");
-	for (var i = 0; i < inputs.length; i++) {
-		if (inputs[i].type === 'button') {
-			inputs[i].disabled = true;
+		var inputs = document.getElementsByTagName("INPUT");
+		for (var i = 0; i < inputs.length; i++) {
+			if (inputs[i].type === 'button') {
+				inputs[i].disabled = true;
+			}
 		}
-	}
 
-	request.onreadystatechange = function(){taskFinish(btn);};
-	request.open("GET", url, true);
-	request.send(); */
+		request.onreadystatechange = function(){taskFinish(btn);};
+		request.open("GET", url, true);
+		request.send(); */
