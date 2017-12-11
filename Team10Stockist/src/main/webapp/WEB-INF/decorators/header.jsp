@@ -16,9 +16,9 @@
 		<h1 align="center">
 			<spring:message code="title.application" />
 		</h1>
-		<h2>
+		<h2 id="userName">
 			<!-- user name from session state -->
-			${sessionScope.USERSESSION.user.name}
+			Welcome, ${sessionScope.USERSESSION.user.name}!
 		</h2>
 	</div>
 

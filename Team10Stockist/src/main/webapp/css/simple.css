@@ -47,6 +47,10 @@ h2 {
 	font-family: 'Muli', sans-serif;
 }
 
+#userName{
+	text-align:right
+}
+
 h3 {
 	margin: 1em 0 0.5em 0;
 	font-weight: bold;
@@ -59,6 +63,7 @@ h3 {
 	text-transform: uppercase;
 	border-bottom: 1px solid rgba(53,86,129, 0.3);
 	text-decoration:underline;
+	
 }
 
 h4 {
@@ -196,7 +201,12 @@ hr {
 #products th {
 	padding-top: 12px;
 	padding-bottom: 12px;
-	text-align: left;
+	text-align: center;
 	background-color: #45c693;
 	color: white;
 }
+
+#products td{
+	text-align: center;
+}
+

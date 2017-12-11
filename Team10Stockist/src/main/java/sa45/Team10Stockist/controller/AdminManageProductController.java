@@ -1,6 +1,7 @@
 package sa45.Team10Stockist.controller;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sa45.Team10Stockist.model.Product;
 import sa45.Team10Stockist.service.ProductService;
+import sa45.Team10Stockist.service.SupplierService;
 import sa45.Team10Stockist.validator.ProductValidator;
 
 
