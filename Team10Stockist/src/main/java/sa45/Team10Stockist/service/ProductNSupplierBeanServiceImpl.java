@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
-
 import sa45.Team10Stockist.javabeans.ProductNSupplierBean;
 import sa45.Team10Stockist.model.Product;
 import sa45.Team10Stockist.model.Supplier;

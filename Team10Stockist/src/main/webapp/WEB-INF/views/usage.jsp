@@ -80,7 +80,7 @@
 	</table>
 	<table>
 	<tr>
-		<td colspan="10" align="left"><input type="button" value="Submit"/></td>
+		<td colspan="10" align="left"><input type="button" value="Submit"onclick="submitTransaction()"/></td>
 		<td colspan="10"></td>
 		<td colspan="10"></td>
 		<td colspan="10"></td>
@@ -158,6 +158,11 @@ function deleteThisRow(btn){
 	row.parentNode.removeChild(row);
 	
 	}   
+
+function submitTransaction(){
+	
+	
+}
 
 </script>
 </body>
