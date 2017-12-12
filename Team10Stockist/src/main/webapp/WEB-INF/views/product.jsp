@@ -62,7 +62,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td align="center"><input type="submit" value="Back to Catalog" /></td>
+				<td align="center"><input type="submit" value="Back" /></td>
 				<td></td>
 				<td></td>
 			</tr>

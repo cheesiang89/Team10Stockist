@@ -2,7 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<form:form method="POST">
+<form:form method="POST" modelAttribute="tlist"
+	action="${pageContext.request.contextPath}/home/catalogue/history/{partNumber}">
 	<h3>
 		${p.name} Transaction
 	</h3>
@@ -34,7 +35,7 @@
 			</tbody>
 			<tbody>
 			<div>
-			<td><button><input type="submit" value="Back"/></button></td>	
+			<td align="center"><input type="submit" value="Back" /></td>	
 			</div>
 			</tbody>
 	</c:if>
