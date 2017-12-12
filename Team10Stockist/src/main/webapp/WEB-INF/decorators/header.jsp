@@ -6,6 +6,8 @@
 <head>
 <c:url value="/css/simple.css" var="ss" />
 <link rel="STYLESHEET" type="text/css" href="${ss}" />
+<c:url value="/css/SupplierManagement.css" var="smgt" />
+<link rel="STYLESHEET" type="text/css" href="${smgt}" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
