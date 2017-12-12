@@ -12,7 +12,7 @@ String userRole = ((UserSession)session.getAttribute("USERSESSION")).getUser().g
 	ArrayList<Product> plist = (ArrayList<Product>) request.getAttribute("plist");
 	PrintWriter print = response.getWriter();
 	StringBuffer t = new StringBuffer();
-	t.append("<p>"+userRole.toUpperCase()+"</p>");
+// 	t.append("<p>"+userRole.toUpperCase()+"</p>");
 	t.append("<table id=\"products\">");
 	t.append("<tr >");
 	t.append("<th>Part Number</th>");
