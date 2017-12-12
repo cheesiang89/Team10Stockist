@@ -68,6 +68,10 @@
 		t.append("<br>");
 	}
 	t.append("</table>");
+	t.append("<br>");
+	t.append("<div style=\"text-align:center\">"+"======================================================================================================"+"</div>");
+	t.append("<div style=\"text-align:center\">"+"End of Report"+"</div>");
+	t.append("<div style=\"text-align:center\">"+"======================================================================================================"+"</div>");
 	print.println(t);
 %>
 
