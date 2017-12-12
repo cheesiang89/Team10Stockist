@@ -3,6 +3,8 @@ package sa45.Team10Stockist.controller;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,8 +29,12 @@ public class UserHistoryController {
 
 	
 	@RequestMapping(value = "/catalogue/history/{partNumber}", method= RequestMethod.GET)
-	public ModelAndView historyProduct(@PathVariable String partNumber){
+	public ModelAndView historyProduct(@PathVariable String partNumber, HttpSession session){
 		ModelAndView mav = new ModelAndView("history");
+		if (session.getAttribute("USERSESSION") == null) {
+			// Can be replaced with access denial
+			mav.setViewName("redirect:/home");
+		} else {
 		Product p = pService.findProduct(Integer.parseInt(partNumber));
 		List<TransactionDetail> tlist = p.getTransactionDetails();
 		
@@ -38,6 +44,7 @@ public class UserHistoryController {
 		}		
 //		mav.addObject("p", p);
 		mav.addObject("tlist", tlist);
+		}
 		return mav;		
 	}
 	

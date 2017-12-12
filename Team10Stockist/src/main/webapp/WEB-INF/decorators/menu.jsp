@@ -21,10 +21,15 @@
 						htmlEscape="true" /> <a href="${rlist}"> <spring:message
 							code="menu.admin.rlist" />
 				</a></li>
+				<li><spring:url value="/admin/manage/supplier" var="mlist"
+						htmlEscape="true" /> <a href="${mlist}"> <spring:message
+							code="menu.admin.mlist" />
+				</a></li>
 				<li><spring:url value="/home/logout" var="logout"
 						htmlEscape="true" /> <a href="${logout}"> <spring:message
 							code="menu.logout" />
 				</a></li>
+				
 			</c:when>
 			<c:when test="${sessionScope.USERSESSION.user.role eq 'mechanic' }">
 				<li><spring:url value="/home/catalogue" var="clist"

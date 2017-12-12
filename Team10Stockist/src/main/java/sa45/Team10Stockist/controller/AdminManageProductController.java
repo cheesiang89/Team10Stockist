@@ -3,6 +3,7 @@ package sa45.Team10Stockist.controller;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +23,29 @@ import sa45.Team10Stockist.service.ProductService;
 import sa45.Team10Stockist.service.SupplierService;
 import sa45.Team10Stockist.validator.ProductValidator;
 
-
 @RequestMapping(value = "/admin")
 @Controller
 public class AdminManageProductController {
 
 	@Autowired
 	ProductService pservice;
-	
+
 	@Autowired
 	ProductValidator pValidator;
-	
+
 	@InitBinder("product")
 	private void initDepartmentBinder(WebDataBinder binder) {
 		binder.addValidators(pValidator);
 	}
 
 	@RequestMapping(value = "/product/add", method = RequestMethod.GET)
-	public ModelAndView newProductPage() {
+	public ModelAndView newProductPage(HttpSession session) {
 		Product p = new Product();
 		ModelAndView mav = new ModelAndView("add", "product", p);
+		if (session.getAttribute("USERSESSION") == null) {
+			// Can be replaced with access denial
+			mav.setViewName("redirect:/home");
+		}
 		return mav;
 	}
 
@@ -60,20 +64,25 @@ public class AdminManageProductController {
 	}
 
 	@RequestMapping(value = "/product/edit/{partNumber}", method = RequestMethod.GET)
-	public ModelAndView editProductPage(@PathVariable String partNumber) {
-		
+	public ModelAndView editProductPage(@PathVariable String partNumber, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView("edit");
-		int pnum = Integer.parseInt(partNumber);
-		Product product = pservice.findProduct(pnum);
-		mav.addObject("product", product);
+		if (session.getAttribute("USERSESSION") == null) {
+			// Can be replaced with access denial
+			mav.setViewName("redirect:/home");
+		} else {
+			int pnum = Integer.parseInt(partNumber);
+			Product product = pservice.findProduct(pnum);
+			mav.addObject("product", product);
+		}
 		return mav;
 
 	}
 
 	@RequestMapping(value = "/product/edit/{partNumber}", method = RequestMethod.POST)
-	public ModelAndView editProductPage(@ModelAttribute Product product, BindingResult result, @PathVariable String partNumber,
-			final RedirectAttributes redirectAttributes) {
-		
+	public ModelAndView editProductPage(@ModelAttribute Product product, BindingResult result,
+			@PathVariable String partNumber, final RedirectAttributes redirectAttributes) {
+
 		ModelAndView mav = new ModelAndView("redirect:/home/catalogue/product/" + product.getPartNumber());
 		pservice.changeProduct(product);
 		String message = "Product " + product.getPartNumber() + " sucessfully updated.";

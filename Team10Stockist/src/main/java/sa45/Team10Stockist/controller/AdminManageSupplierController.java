@@ -3,6 +3,8 @@ package sa45.Team10Stockist.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.View;
 
 import sa45.Team10Stockist.model.Product;
 import sa45.Team10Stockist.model.Supplier;
+import sa45.Team10Stockist.model.User;
 import sa45.Team10Stockist.service.ProductService;
 import sa45.Team10Stockist.service.SupplierService;
 
@@ -33,11 +36,17 @@ public class AdminManageSupplierController {
 	@Autowired
 	SupplierService sservice;
 	
-	@RequestMapping(value = "/management/supplier", method = RequestMethod.GET)
-	public ModelAndView supplierManagement() {
+	@RequestMapping(value = "/manage/supplier", method = RequestMethod.GET)
+	public ModelAndView supplierManagement(HttpSession session) {
 		ModelAndView mav = new ModelAndView("supplier-management");
-		ArrayList<Supplier> slist = sservice.findAllSupplier();
-		mav.addObject("slist", slist);
+		
+		if (session.getAttribute("USERSESSION") == null) {
+			mav.setViewName("redirect:/home");
+		} else {
+			//Can be replaced with access denial
+			ArrayList<Supplier> slist = sservice.findAllSupplier();
+			mav.addObject("slist", slist);
+		}
 		return mav;
 	}
 	

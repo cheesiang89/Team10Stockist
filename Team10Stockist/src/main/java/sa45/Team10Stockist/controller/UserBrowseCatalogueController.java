@@ -26,36 +26,41 @@ public class UserBrowseCatalogueController {
 	@Autowired
 	private ProductService pService;
 
-	
-	@RequestMapping(value = "/catalogue", method= RequestMethod.GET)
-	public ModelAndView browseCataloguePage( @ModelAttribute User user,HttpSession session ) {
+	@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
+	public ModelAndView browseCataloguePage(@ModelAttribute User user, HttpSession session) {
 		ModelAndView mav = new ModelAndView("login");
-		 		 mav = new ModelAndView("browse-catalogue");
-			ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProduct();
-			mav.addObject("plist", productList);
-			mav.addObject("session",session);
-			return mav;
+		mav = new ModelAndView("browse-catalogue");
 		
+		if (session.getAttribute("USERSESSION") == null) {
+			mav.setViewName("redirect:/home");
+		} else {
+			ArrayList<Product> productList = (ArrayList<Product>) pService.findAllProduct();
+			mav.addObject("plist", productList);
+			mav.addObject("session", session);
 		}
-	
-	@RequestMapping(value = "/catalogue", method= RequestMethod.POST)
+		return mav;
+	}
+
+	@RequestMapping(value = "/catalogue", method = RequestMethod.POST)
 	public ModelAndView filteredCataloguePage(WebRequest request) {
-		String searchParameter= request.getParameter("search");	
-		String colorParameter = request.getParameter("color");	
-		String manufacturerParameter = request.getParameter("manufacturer");	
-	    String[] criteria = {searchParameter,colorParameter,manufacturerParameter};
-	
+		String searchParameter = request.getParameter("search");
+		String colorParameter = request.getParameter("color");
+		String manufacturerParameter = request.getParameter("manufacturer");
+		String[] criteria = { searchParameter, colorParameter, manufacturerParameter };
+
 		ModelAndView mav = new ModelAndView("browse-catalogue");
-		ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProductByCriteria(criteria);
-		//ArrayList<Product> productList = (ArrayList<Product>)pService.findAllProductByCriteria(new String[] {"","",""});
+		ArrayList<Product> productList = (ArrayList<Product>) pService.findAllProductByCriteria(criteria);
+		// ArrayList<Product> productList =
+		// (ArrayList<Product>)pService.findAllProductByCriteria(new String[]
+		// {"","",""});
 		mav.addObject("plist", productList);
 		return mav;
-		
-		}
-		
-	
-	@RequestMapping(value = "/catalogue/delete/{partNumber}", method= RequestMethod.GET)
-	public @ResponseBody void deleteProduct(@PathVariable String partNumber, final RedirectAttributes redirectAttributes){
+
+	}
+
+	@RequestMapping(value = "/catalogue/delete/{partNumber}", method = RequestMethod.GET)
+	public @ResponseBody void deleteProduct(@PathVariable String partNumber,
+			final RedirectAttributes redirectAttributes) {
 		pService.removeProduct(pService.findProduct(Integer.parseInt(partNumber)));
 	}
 

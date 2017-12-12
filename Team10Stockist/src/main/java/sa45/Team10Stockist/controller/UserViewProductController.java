@@ -1,5 +1,7 @@
 package sa45.Team10Stockist.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,12 +24,17 @@ public class UserViewProductController {
 	
 	
 	@RequestMapping(value = "/catalogue/product/{partNumber}", method = RequestMethod.GET)
-	public ModelAndView productPage(@PathVariable String partNumber) {
+	public ModelAndView productPage(@PathVariable String partNumber, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView("product");
+		if (session.getAttribute("USERSESSION") == null) {
+			// Can be replaced with access denial
+			mav.setViewName("redirect:/home");
+		} else {
 		int pnum = Integer.parseInt(partNumber);
 		Product product = pservice.findProduct(pnum);
 		mav.addObject("product", product);
+		}
 		return mav;
 
 	}
