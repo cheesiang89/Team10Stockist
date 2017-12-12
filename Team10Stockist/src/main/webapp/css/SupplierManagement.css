@@ -1,10 +1,11 @@
 .edititem{
-	font-size:20px;
+	font-size:15px;
 }
 
 .editdiv{
 	float:left;
-	background-color:white;
+	background-color:#fefefe;
+    width:100%;
 }
 
 
@@ -67,11 +68,11 @@
 .modal-header {
     padding: 2px 16px;
     background-color: #5cb85c;
-    color: white;
+    color: #fefefe;
     height: 40px;
 }
 
-.modal-body {padding: 2px 16px; background-color:white;}
+.modal-body {background-color:#fefefe; width:100%}
 
 .modal-footer {
     padding: 2px 16px;

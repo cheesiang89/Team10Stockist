@@ -42,15 +42,32 @@ var p = $("#productList");
 
 
 
-function AddPartRow(){
-	//window.alert("S");
-$("#PartTable").append("<tr><td>"<input>"</td>"+
-			"<td>"+2+"</td>"+
-			"<td>"+3+"</td>"+
-			"<td>"+4+"</td>"+
-			"<td>"+5+"</td>"+
-			"<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/home/catalogue/product/"+6 +"'\"></td></tr>");
-}
+/* function textBoxPart (){
+	$(".panel").html(
+		"<div class=\"editdiv\">"+
+		"<table>"+
+		"<tr>"+
+		"<td><span class=\"edititem\">Supplier ID: </span></td>"+
+		"<td><input style=\"text\" id=\"text-sid\" placeHolder=\"Supplier ID\" class=\"edittext\" value=\""+sid+"\"/></td>"+
+		"</tr>"+
+		"<tr>"+
+		"<td><span class=\"edititem\">Supplier Name: </span></td>"+
+		"<td><input style=\"text\" id=\"text-sname\" placeHolder=\"Supplier Name\" class=\"edittext\" value=\""+sname+"\"/></td>"+
+		"</tr>"+
+		"<tr>"+
+		"<td><span class=\"edititem\">Contact Number: </span></td>"+
+		"<td><input style=\"text\" id=\"text-contact\" placeHolder=\"Contact Name\" class=\"edittext\" value=\""+contact+"\"/></td>"+
+		"</tr>"+
+		"<tr>"+
+		"<td>"+
+		"<span class=\"edititem\">Supply: </span>"+
+		"</td>"+
+		"</tr>"+
+		"</table>"+
+		"</div>"
+	)
+} */
+
 // When the user clicks the button, open the modal 
 function edit (btn) {
 	var sid = btn.name;
@@ -78,6 +95,7 @@ function edit (btn) {
 					"<th>Description</th>"+
 					"<th>Dimension</th>"+
 					"<th>Detail</th>"+
+					"<th class=\"deletePartRowCol\">Delete</th>"+
 					"</tr>");
 			$.each
 			(result, function(productIndex, productDetail)
@@ -85,21 +103,63 @@ function edit (btn) {
 				
 				//window.alert(productDetail.partNumber);
 				
-				text = text + ("<tr><td>"+productDetail.partNumber+"</td>"+
-						"<td>"+productDetail.name+"</td>"+
+				text = text + ("<tr><td class=\"td-pid\">"+productDetail.partNumber+"</td>"+
+						"<td class=\"td-pname\">"+productDetail.name+"</td>"+
 						"<td>"+productDetail.color+"</td>"+
 						"<td>"+productDetail.description+"</td>"+
 						"<td>"+productDetail.dimension+"</td>"+
-						"<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/home/catalogue/product/"+productDetail.partNumber +"'\"></td></tr>");
+						"<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/home/catalogue/product/"+productDetail.partNumber +"'\"></td>"+
+						"<td><input type=\"button\" value=\"Delete\" class=\"deletePartRowCol\" onclick=\"deletePartRow(this)\"></td></tr>");
 				}
 			)
 			text = text + ("</table>");
 			p.append(text);
 			}
 	});
-	//alert("good");
-	modal.style.display = "block";}
-	
+	modal.style.display = "block";
+}
+
+function deleteSupplierRow(btn){
+	const no =btn.parentNode.parentNode.getElementsByClassName("td-sid")[0].innerHTML;
+	const name =btn.parentNode.parentNode.getElementsByClassName("td-sname")[0].innerHTML;
+	if (window.confirm("Do you want to delete "+name+"( Supplier ID: "+no+" )?")) { 
+		/* const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
+		$.ajax({url: deleteurl}); */
+		var row = btn.parentNode.parentNode;
+		row.parentNode.removeChild(row);
+		
+	}
+}
+
+function deletePartRow(btn){
+	const no =btn.parentNode.parentNode.getElementsByClassName("td-pid")[0].innerHTML;
+	const name =btn.parentNode.parentNode.getElementsByClassName("td-pname")[0].innerHTML;
+	if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) { 
+		/* const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
+		$.ajax({url: deleteurl}); */
+		var row = btn.parentNode.parentNode;
+		row.parentNode.removeChild(row);
+		
+	}
+}
+
+/* function AddPartRow(){ */
+	//window.alert("S");
+/* $("#PartTable").append("<tr><td>1</td>"+
+			"<td>"+2+"</td>"+
+			"<td>"+3+"</td>"+
+			"<td>"+4+"</td>"+
+			"<td>"+5+"</td>"+
+			"<td><input type=\"button\" value=\"Detail\" ></td></tr>"); */
+			
+	/* $("#addRow").append("<tr><td><input type=\"text\" placeholder=\"Part Number\"> </td>"+
+						"<td><input type=\"button\" value=\"Confirm\"> </td></tr>");			
+ */
+ /* $("#selectPartNumber").css({display:"block"});
+ }  */
+
+
+
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {

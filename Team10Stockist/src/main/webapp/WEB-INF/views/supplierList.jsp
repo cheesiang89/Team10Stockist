@@ -24,7 +24,7 @@
 	for (Supplier s : slist) {
 		t.append("<tr>");
 		//col 1
-		t.append("<td>"+s.getSupplierId()+"<td>");
+		t.append("<td class=\"td-sid\">"+s.getSupplierId()+"<td>");
 		//col 2
 		t.append("<td class=\"td-sname\">"+s.getSupplierName()+"<td>");
 		//col 3
@@ -36,10 +36,9 @@
 			t.append("<br>");
 		}
 		t.append("<td>");
-		t.append("<td><input type=\"button\" value=\"History\" </td>");
-		t.append("<td><input type=\"button\" value=\"Detail\" </td>");
-		t.append("<td><input onclick=\"edit(this)\" type=\"button\" value=\"Edit\" name=\""+s.getSupplierId()+"\"</td>");
-		t.append("<td><input type=\"button\" value=\"Delete\" </td>");
+		t.append("<td><input onclick=\"detail(this)\" type=\"button\" value=\"Detail\" name=\""+s.getSupplierId()+"\"></td>");
+		t.append("<td><input onclick=\"edit(this)\" type=\"button\" value=\"Edit\" name=\""+s.getSupplierId()+"\"></td>");
+		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteSupplierRow(this)\" ></td>");
 		t.append("</tr>");
 	}
 	t.append("</table>");
