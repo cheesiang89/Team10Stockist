@@ -126,9 +126,9 @@ function addItemAndRow(){
 	}
 	else {
 		var t = $("#transTable");
-		t.append("<tr><td><input id=\"txtTtpid"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
+		t.append("<tr><td><input id=\"txtTtpid"+index+"\" readonly= \"readonly\" class=\"classPartnumber\" style=\"border:0\"/></td>"+
 				"<td><input id=\"txtTtpName"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
-				"<td><input id=\"txtTtQty"+index+"\" style=\"border:0\"/></td>"+
+				"<td><input type=\"text\" id=\"txtTtQty"+index+"\" class=\"classQuantity\" style=\"border:0\"/></td>"+
 				"<td><input id=\"txtTtPrice"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
 				"<td><input id=\txtTtSubTotal"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
 				"<td><input type=\"button\" id=\"btnDlt"+index+"\" class=\"Delete\" value=\"Delete\" onclick= \"deleteThisRow(this)\"/></td></tr>");
@@ -160,8 +160,32 @@ function deleteThisRow(btn){
 	}   
 
 function submitTransaction(){
+	var q = document.getElementsByClassName("classQuantity");
+	var p = document.getElementsByClassName("classPartnumber");
+	var quantity = [];
+	var partNumber = [];
+	$.each
+	(q, function(index, v)
+		{
+			window.alert(v.value);
+			quantity.push(v.value);
+		}
+	);
+	window.alert(quantity.length);
+	$.each
+	(p, function(index, v)
+		{
+			partNumber.push(v.value);
+		}
+	);
+	var qjson = JSON.stringify(quantity);
+	var pjson = JSON.stringify(partNumber);
+	window.alert(qjson);
+	window.alert(pjson);
 	
-	
+	$.post(url:"/team10stockist/mechanic/usage/",
+			data: { json_1:$.toJSON(qjson), json_2:$.toJSON(pjson)}
+			)
 }
 
 </script>

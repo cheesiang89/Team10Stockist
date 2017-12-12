@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -65,15 +66,11 @@ public class MechanicController {
 	
 
 	
-	@RequestMapping(value = "/usage",method = RequestMethod.POST)
-	public ModelAndView approveTransaction(@ModelAttribute Transaction transaction, 
-			BindingResult result,HttpSession session, final RedirectAttributes redirectAttributes){
-		if (result.hasErrors())
-			return new ModelAndView("usage");
+	/*@RequestMapping(value = "/usage",method = RequestMethod.POST)
+	public ModelAndView approveTransaction(WebRequest request){
 		
-		return null;
 	}
-	
+	*/
 	
 /*	@RequestMapping(value = "/course/edit/{id}", method = RequestMethod.POST)
 	public ModelAndView approveOrRejectCourse(@ModelAttribute("approve") Approve approve, BindingResult result,
