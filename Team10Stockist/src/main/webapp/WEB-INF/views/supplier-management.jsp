@@ -2,30 +2,48 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="sa45.Team10Stockist.model.Supplier"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <body>
 
 
+<div>
+		
+		<span>Part: </span>
+		
+		<select id="partSelect" name="Part" onchange="filt(this.value)">
+				<option value="">All</option>
+			<c:forEach var="p" varStatus="idx" items="${plist}">
+				<option value="( ${p.partNumber} )">${p.name} ( ${p.partNumber} )</option>
+			</c:forEach>
+		</select>
+		
+		
+		<span>Contact Number: </span>
+		<input type="text" id="searchText" name="search"/> 
+			
+	<input type="button" id="searchButton" name="search" value="Search" style="margin-right:30px" onclick="search()"/>
+	
+</div>
+
+<div>
+	<c:import url="/WEB-INF/views/supplierList.jsp" />
+</div>
 
 
-	<div>
-		<c:import url="/WEB-INF/views/supplierList.jsp" />
-	</div>
+<div id="myModal" class="modal">
+	<div class="modal-content">
+		<div class="modal-header">
+			<span id="sname" style="font-size:20px; align:center"></span>
+			<span class="close" onclick="closePanel()">&times;</span>
+		</div>
 
-
-	<div id="myModal" class="modal">
-		<div class="modal-content">
-			<div class="modal-header">
-				<span id="sname" style="font-size:20px; align:center"></span>
-				<span class="close" onclick="closePanel()">&times;</span>
-			</div>
-
-			<div id="panel" class="modal-body">
-				<%-- <c:import url="/WEB-INF/views/editPanel.jsp" /> --%>
-			</div>
+		<div id="panel" class="modal-body">
+			
 		</div>
 	</div>
+</div>
 
-	<script>
+<script>
 
 var modal = document.getElementById("myModal");
 
@@ -37,7 +55,48 @@ var panel = document.getElementById("panel");
 
 var p = $("#productList");
 
+function search(){
+	const numberText = document.getElementById("searchText").value;
+	//window.alert(numberText);
+	const rows = $(".td-row");
+	for (let i = 0; i < rows.length; i++) {
+		rows[i].style.display = "";
+	}
+	document.getElementById("partSelect").selectedIndex=0;
+	
+	for (let i = 0; i < rows.length; i++) {
+		const content = rows[i].getElementsByClassName("td-contact")[0].innerHTML;
+		//window.alert(content);
+		if (!content.includes(numberText)){
+			rows[i].style.display="none";
+		}
+	};
+}
 
+
+function filt(filter) {
+	const rows = $(".td-row")
+	for (let i = 0; i < rows.length; i++) {
+		rows[i].style.display = "";
+	}
+	for (let i = 0; i < rows.length; i++) {
+		const content = rows[i].getElementsByClassName("td-part")[0].innerHTML;
+		if (!content.includes(filter)){
+			rows[i].style.display="none";
+		}
+	};
+	
+	/* const rows = $(".td-row")
+	$(".td-row").css("display", "");
+	$(".td-row").each(
+		function(){
+			const content = this.getElementsByClassName("td-part")[0].innerHTML;
+			if (!content.includes(filter)){
+				this.css("display", "none");
+			}
+		}			
+	)*/
+}
 
 
 function showPanel(btn){
@@ -46,7 +105,7 @@ function showPanel(btn){
 	var contact = btn.parentNode.parentNode.getElementsByClassName("td-contact")[0].innerHTML;
 	var goToUrl = ("/team10stockist/admin/management/supplier/edit/" + sid);
 	$("#panel").html("");
-	$("#sname").html("Edit " + sname);
+	$("#sname").html("Supplier " + sname);
 	$("#panel").html(
 		"<div class=\"editdiv\">"+
 		"<table>"+
@@ -63,8 +122,9 @@ function showPanel(btn){
 		"<td><input style=\"text\" id=\"text-contact\" placeHolder=\"Contact Name\" class=\"edittext\" value=\""+contact+"\"/></td>"+
 		"</tr>"+
 		"<tr>"+
-		"<td>"+
-		"<span class=\"edititem\">Supply: </span>"+
+		"<td><span class=\"edititem\">Supply: </span></td>"+
+		
+		"<td><span class=\"edititem\">Supply: </span>"+
 		"</td>"+
 		"</tr>"+
 		"</table>"+
@@ -87,8 +147,7 @@ function showPanel(btn){
 					"</tr>");
 			$.each
 			(result, function(productIndex, productDetail)
-				{
-				
+				{				
 				text = text + ("<tr><td class=\"td-pid\">"+productDetail.partNumber+"</td>"+
 						"<td class=\"td-pname\">"+productDetail.name+"</td>"+
 						"<td>"+productDetail.color+"</td>"+
@@ -99,6 +158,7 @@ function showPanel(btn){
 				}
 			)
 			text = text + ("</table>");
+/* 			text = text + ("<span><input type=\"button\" value=\"Add\"></span>") */
 			$("#panel").append(text);
 			}
 	});

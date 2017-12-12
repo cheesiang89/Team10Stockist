@@ -9,7 +9,7 @@
 	ArrayList<Supplier> slist = (ArrayList<Supplier>) request.getAttribute("slist");
 	PrintWriter print = response.getWriter();
 	StringBuffer t = new StringBuffer();
-	t.append("<table>");
+	t.append("<table id=\"sTable\">");
 	t.append("<tr>");
 	//col 1
 	t.append("<th>Supplier ID<th>");
@@ -22,7 +22,7 @@
 	t.append("<th colspan=\"2\"></th>");
 	t.append("</tr>");
 	for (Supplier s : slist) {
-		t.append("<tr>");
+		t.append("<tr class=\"td-row\">");
 		//col 1
 		t.append("<td class=\"td-sid\">"+s.getSupplierId()+"<td>");
 		//col 2
@@ -30,7 +30,7 @@
 		//col 3
 		t.append("<td class=\"td-contact\">"+s.getContactNumber()+"<td>");
 		//col 4
-		t.append("<td>");
+		t.append("<td class=\"td-part\">");
 		for(Product p : s.getProducts()){
 			t.append(p.getName() + " ( "+p.getPartNumber()+" ) ");
 			t.append("<br>");

@@ -18,7 +18,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 		    			  @Param("color") String color,
 		    		  @Param("manufacturer") String manufacturer);
 
-//	"SELECT c FROM customer c WHERE "
-//    + "(:name = '' OR c.name LIKE concat('%', :name ,'%'') "
-//    + "AND (:country = '' OR c.country LIKE concat ('%', :country, '%'')"
 }

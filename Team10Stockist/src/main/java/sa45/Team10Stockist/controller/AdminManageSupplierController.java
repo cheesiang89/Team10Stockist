@@ -43,7 +43,10 @@ public class AdminManageSupplierController {
 		if (session.getAttribute("USERSESSION") == null) {
 			mav.setViewName("redirect:/home");
 		} else {
-			//Can be replaced with access denial
+			
+			ArrayList<Product> plist = pservice.findAllProduct();
+			mav.addObject("plist", plist);
+			
 			ArrayList<Supplier> slist = sservice.findAllSupplier();
 			mav.addObject("slist", slist);
 		}
