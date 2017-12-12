@@ -2,6 +2,9 @@ package sa45.Team10Stockist.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -45,10 +48,12 @@ public class Product implements Serializable {
 	private Double unitPrice;
 
 	//bi-directional many-to-many association to Supplier
+	@JsonIgnore
 	@ManyToMany(mappedBy="products")
 	private List<Supplier> suppliers;
 
 	//bi-directional many-to-one association to TransactionDetail
+	@JsonIgnore
 	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<TransactionDetail> transactionDetails;
 
