@@ -19,7 +19,7 @@
 	t.append("<th>Contact Number<th>");
 	//col 4
 	t.append("<th>Parts<td>");
-	t.append("<th colspan=\"3\"></th>");
+	t.append("<th colspan=\"2\"></th>");
 	t.append("</tr>");
 	for (Supplier s : slist) {
 		t.append("<tr>");
@@ -36,8 +36,7 @@
 			t.append("<br>");
 		}
 		t.append("<td>");
-		t.append("<td><input onclick=\"detail(this)\" type=\"button\" value=\"Detail\" name=\""+s.getSupplierId()+"\"></td>");
-		t.append("<td><input onclick=\"edit(this)\" type=\"button\" value=\"Edit\" name=\""+s.getSupplierId()+"\"></td>");
+		t.append("<td><input onclick=\"showPanel(this)\" type=\"button\" value=\"Show\" name=\""+s.getSupplierId()+"\"></td>");
 		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteSupplierRow(this)\" ></td>");
 		t.append("</tr>");
 	}

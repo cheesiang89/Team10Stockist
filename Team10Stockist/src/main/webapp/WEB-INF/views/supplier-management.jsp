@@ -16,23 +16,21 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<span id="sname" style="font-size:20px; align:center"></span>
-				<span class="close">&times;</span>
+				<span class="close" onclick="closePanel()">&times;</span>
 			</div>
 
 			<div id="panel" class="modal-body">
-				<c:import url="/WEB-INF/views/editPanel.jsp" />
+				<%-- <c:import url="/WEB-INF/views/editPanel.jsp" /> --%>
 			</div>
 		</div>
 	</div>
 
 	<script>
-// Get the modal
+
 var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
 var btn = document.getElementById("edit");
 
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 var panel = document.getElementById("panel");
@@ -42,8 +40,14 @@ var p = $("#productList");
 
 
 
-/* function textBoxPart (){
-	$(".panel").html(
+function showPanel(btn){
+	var sid = btn.parentNode.parentNode.getElementsByClassName("td-sid")[0].innerHTML;
+	var sname = btn.parentNode.parentNode.getElementsByClassName("td-sname")[0].innerHTML;
+	var contact = btn.parentNode.parentNode.getElementsByClassName("td-contact")[0].innerHTML;
+	var goToUrl = ("/team10stockist/admin/management/supplier/edit/" + sid);
+	$("#panel").html("");
+	$("#sname").html("Edit " + sname);
+	$("#panel").html(
 		"<div class=\"editdiv\">"+
 		"<table>"+
 		"<tr>"+
@@ -65,28 +69,12 @@ var p = $("#productList");
 		"</tr>"+
 		"</table>"+
 		"</div>"
-	)
-} */
-
-// When the user clicks the button, open the modal 
-function edit (btn) {
-	var sid = btn.name;
-	var sname = btn.parentNode.parentNode.getElementsByClassName("td-sname")[0].innerHTML;
-	var contact = btn.parentNode.parentNode.getElementsByClassName("td-contact")[0].innerHTML;
-	var goToUrl = ("/team10stockist/admin/management/supplier/edit/" + sid);
-	//window.alert(sid);
-	//var goToUrl = 
-	//alert('a');
+	);
 	$.ajax
 	({
 		type:"get" , url: goToUrl, 
 		success:function(result)
 		{
-			$("#sname").html("Edit " + sname);
-			$("#text-sid").val(sid);
-			$("#text-sname").val(sname);
-			$("#text-contact").val(contact);
-			p.html("");
 			var text;
 			text = ("<table id=\"PartTable\">"+
 					"<tr><th>Part Number</th>"+
@@ -101,8 +89,6 @@ function edit (btn) {
 			(result, function(productIndex, productDetail)
 				{
 				
-				//window.alert(productDetail.partNumber);
-				
 				text = text + ("<tr><td class=\"td-pid\">"+productDetail.partNumber+"</td>"+
 						"<td class=\"td-pname\">"+productDetail.name+"</td>"+
 						"<td>"+productDetail.color+"</td>"+
@@ -113,11 +99,12 @@ function edit (btn) {
 				}
 			)
 			text = text + ("</table>");
-			p.append(text);
+			$("#panel").append(text);
 			}
 	});
 	modal.style.display = "block";
 }
+
 
 function deleteSupplierRow(btn){
 	const no =btn.parentNode.parentNode.getElementsByClassName("td-sid")[0].innerHTML;
@@ -134,39 +121,18 @@ function deleteSupplierRow(btn){
 function deletePartRow(btn){
 	const no =btn.parentNode.parentNode.getElementsByClassName("td-pid")[0].innerHTML;
 	const name =btn.parentNode.parentNode.getElementsByClassName("td-pname")[0].innerHTML;
-	if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) { 
-		/* const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
-		$.ajax({url: deleteurl}); */
+	if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) {
 		var row = btn.parentNode.parentNode;
 		row.parentNode.removeChild(row);
 		
 	}
 }
 
-/* function AddPartRow(){ */
-	//window.alert("S");
-/* $("#PartTable").append("<tr><td>1</td>"+
-			"<td>"+2+"</td>"+
-			"<td>"+3+"</td>"+
-			"<td>"+4+"</td>"+
-			"<td>"+5+"</td>"+
-			"<td><input type=\"button\" value=\"Detail\" ></td></tr>"); */
-			
-	/* $("#addRow").append("<tr><td><input type=\"text\" placeholder=\"Part Number\"> </td>"+
-						"<td><input type=\"button\" value=\"Confirm\"> </td></tr>");			
- */
- /* $("#selectPartNumber").css({display:"block"});
- }  */
-
-
-
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
+function closePanel(){
+	modal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
+
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
