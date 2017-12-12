@@ -4,7 +4,7 @@
 <h3>Product Edit Page</h3>
 <form:form method="POST" modelAttribute="product"
 	action="${pageContext.request.contextPath}/admin/product/edit/{partNumber}">
-	<table>
+	<table align="center">
 		<tbody>
 			<tr>
 				<td>Part Number</td>
@@ -62,7 +62,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Update" /></td>
+				<td align="center"><input type="submit" value="Update" /></td>
 				<td></td>
 				<td></td>
 			</tr>

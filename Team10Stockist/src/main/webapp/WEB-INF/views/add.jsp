@@ -4,7 +4,7 @@
 <h3>New Product Page</h3>
 <form:form method="POST" modelAttribute="product"
 	action="${pageContext.request.contextPath}/admin/product/add">
-	<table>
+	<table align="center">
 		<tbody>
 			<tr>
 				<td>Product Name</td>
@@ -67,9 +67,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Create" /></td>
-				<td></td>
-				<td></td>
+				<td align="center"><input type="submit" value="Create" /></td>
 			</tr>
 		</tbody>
 	</table>

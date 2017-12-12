@@ -4,7 +4,7 @@
 <h3>Product Page</h3>
 <form:form method="POST" modelAttribute="product"
 	action="${pageContext.request.contextPath}/home/catalogue/product/{partNumber}">
-	<table>
+	<table align="center">
 		<tbody>
 			<tr>
 				<td>Part Number</td>
@@ -62,7 +62,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Back to Catalog" /></td>
+				<td align="center"><input type="submit" value="Back to Catalog" /></td>
 				<td></td>
 				<td></td>
 			</tr>
