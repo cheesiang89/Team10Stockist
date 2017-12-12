@@ -147,7 +147,9 @@ function addItemAndRow(){
 	}
 	else {
 		var t = $("#transTable tbody");
-		t.append("<tr><td><input id=\"txtTtpid"+index+"\" readonly= \"readonly\" class=\"classPartnumber\" style=\"border:0\"/></td>"+
+		var customerId = $('#selectCustomer').val();
+		t.append("<tr><td><input type='hidden' value='"+customerId+"' class=\"classCustomerId\"/>" +
+				"<input id=\"txtTtpid"+index+"\" readonly= \"readonly\" class=\"classPartnumber\" style=\"border:0\"/></td>"+
 				"<td><input id=\"txtTtpName"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
 				"<td><input type=\"text\" id=\"txtTtQty"+index+"\" class=\"classQuantity\" style=\"border:0\"/></td>"+
 				"<td><input id=\"txtTtPrice"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
@@ -179,64 +181,27 @@ function deleteThisRow(btn){
 	
 	}   
 
-/* function submitTransaction(){
-	var q = document.getElementsByClassName("classQuantity");
-	var p = document.getElementsByClassName("classPartnumber");
-	var quantity = [];
-	var partNumber = [];
-	$.each
-	(q, function(index, v)
-		{
-			window.alert(v.value);
-			quantity.push(v.value);
+function submitTransaction(){
+	var data = [];
+	$('#transTable tbody tr').each(function (i, tr) {
+	    var row = $(tr);
+	    data.push({
+			customerId: parseInt($('.classCustomerId', row).val(), 10),
+			partNumber: parseInt($('.classPartnumber', row).val(), 10),
+			quantity: parseInt($('.classQuantity', row).val(), 10)
+		});
+	});
+	console.log(data);
+	$.ajax({
+		method: 'POST',
+		url: '/team10stockist/mechanic/usage',
+		data: JSON.stringify(data),
+		contentType: 'application/json',
+		success: function () {
+		    console.log('success');
 		}
-	);
-	window.alert(quantity.length);
-	$.each
-	(p, function(index, v)
-		{
-			partNumber.push(v.value);
-		}
-	);
-	var qjson = JSON.stringify(quantity);
-	var pjson = JSON.stringify(partNumber);
-	window.alert(qjson);
-	window.alert(pjson);
-	
-	 $.post(url:"/team10stockist/mechanic/usage/",
-			data: { json_1:$.toJSON(qjson), json_2:$.toJSON(pjson)}
-			)
-}*/
-
-/* function submitTransaction(){
-	/* var table = $('#transTable').DataTable();
-	var data = table.rows().data(); */
-/* 	var x = document.getElementById('transTable').tBodies[0].rows.length;
-	window.alert(x); 
-	
-	var transaction = 
-	{
-	    "transId":"",
-	    "customer":{"id":"1"},
-	    "transactionDetails":[
-	        {"quantity":"1","product":{"id":"1"}},
-	        {"quantity":"1","product":{"id":"2"}}
-	        ],
-	    "user":{"id":1}
-	}
-	
-	$.post({url:"/team10stockist/mechanic/usage", data:{
-	    "transId":"",
-	    "customer":{"id":"1"},
-	    "transactionDetails":[
-	        {"quantity":"1","product":{"id":"1"}},
-	        {"quantity":"1","product":{"id":"2"}}
-	        ],
-	    "user":{"id":1}
-	},.  success:function(){window.alert("success!!!!")}});
-	
-} */
-
+	});
+}
 
 </script>
 </body>

@@ -1,30 +1,23 @@
 package sa45.Team10Stockist.controller;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import javax.enterprise.inject.Model;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import sa45.Team10Stockist.javabeans.Usage;
-import sa45.Team10Stockist.model.Customer;
-import sa45.Team10Stockist.model.Product;
-import sa45.Team10Stockist.model.Transaction;
+import sa45.Team10Stockist.model.*;
 import sa45.Team10Stockist.service.CustomerService;
 import sa45.Team10Stockist.service.ProductService;
+import sa45.Team10Stockist.service.TransactionDetailService;
 import sa45.Team10Stockist.service.TransactionService;
 
 
@@ -40,6 +33,12 @@ public class MechanicController {
 	
 	@Autowired
 	CustomerService cservice;
+
+	@Autowired
+	private TransactionService transactionService;
+
+	@Autowired
+	private TransactionDetailService transactionDetailService;
 	
 	@RequestMapping(value = "/usage", method = RequestMethod.GET)
 	public ModelAndView newUsagePage() {
@@ -81,12 +80,36 @@ public class MechanicController {
 
 	
 	@RequestMapping(value = "/usage",method = RequestMethod.POST)
-	public ModelAndView approveTransaction(@RequestBody Transaction tran){
-		ModelAndView mav = new ModelAndView("Testing");
-		mav.addObject("t", tran);
-		return mav;
+	@ResponseBody
+	/**
+	 * json -> [{customerId: 3, partNumber: 78, quantity: 11}]
+	 */
+	public String approveTransaction(@RequestBody List<Map<String, Integer>> json, HttpSession session){
+		UserSession us = (UserSession) session.getAttribute("USERSESSION");
+		if (us == null) return "redirect:/home";
+		User user= us.getUser();
+		Date now = new Date();
+		for (Map<String, Integer> row: json) {
+			Integer customerId = row.get("customerId");
+			Integer partNumber = row.get("partNumber");
+			Integer quantity = row.get("quantity");
+			Transaction transaction = new Transaction();
+			transaction.setUser(user);
+			transaction.setCustomer(cservice.findCustomer(customerId));
+			transaction.setDatetime(now);
+			transactionService.saveTrans(transaction);  // get the id
+			TransactionDetail transactionDetail = new TransactionDetail();
+			TransactionDetailPK pk = new TransactionDetailPK();
+			pk.setTransId(transaction.getTransId());
+			pk.setPartNumber(partNumber);
+			transactionDetail.setId(pk);
+			transactionDetail.setProduct(pservice.findProduct(partNumber));
+			transactionDetail.setQuantity(quantity);
+			transactionDetail.setTransaction(transaction);
+			transactionDetailService.saveTransactionDetail(transactionDetail);
+		}
+		return "success";
 	}
-	
 	
 /*	@RequestMapping(value = "/course/edit/{id}", method = RequestMethod.POST)
 	public ModelAndView approveOrRejectCourse(@ModelAttribute("approve") Approve approve, BindingResult result,
