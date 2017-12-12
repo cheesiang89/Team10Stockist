@@ -34,8 +34,8 @@ public class User implements Serializable {
 	private List<Transaction> transactions;
 
 	public User() {
-	}
-
+	}	
+	
 	public int getUserId() {
 		return this.userId;
 	}

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
-
+import org.json.JSONArray;
+import org.json.JSONObject;
 /**
  * The persistent class for the transaction database table.
  * 
@@ -38,7 +38,7 @@ public class Transaction implements Serializable {
 
 	public Transaction() {
 	}
-
+	
 	public int getTransId() {
 		return this.transId;
 	}
@@ -92,5 +92,6 @@ public class Transaction implements Serializable {
 
 		return transactionDetail;
 	}
+
 
 }

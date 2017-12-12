@@ -33,6 +33,7 @@ public class Customer implements Serializable {
 
 	public Customer() {
 	}
+	
 
 	public int getCustomerId() {
 		return this.customerId;

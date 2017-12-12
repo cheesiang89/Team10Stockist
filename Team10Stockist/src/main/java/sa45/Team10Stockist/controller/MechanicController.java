@@ -5,11 +5,13 @@ import java.util.Calendar;
 import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +25,7 @@ import sa45.Team10Stockist.model.Product;
 import sa45.Team10Stockist.model.Transaction;
 import sa45.Team10Stockist.service.CustomerService;
 import sa45.Team10Stockist.service.ProductService;
+import sa45.Team10Stockist.service.TransactionService;
 
 
 @Controller
@@ -33,9 +36,10 @@ public class MechanicController {
 	ProductService pservice;
 	
 	@Autowired
-	CustomerService cservice;
+	TransactionService tservice;
 	
-
+	@Autowired
+	CustomerService cservice;
 	
 	@RequestMapping(value = "/usage", method = RequestMethod.GET)
 	public ModelAndView newUsagePage() {
@@ -44,9 +48,19 @@ public class MechanicController {
 		mav.addObject("customerlist",customerlist);
 		List<Product> productlist = pservice.findAllProduct();
 		mav.addObject("productlist", productlist);
+		List<Transaction> translist = tservice.findAllTransaction();
+		mav.addObject("translist",translist);
 		return mav;
 	}
 
+	@RequestMapping(value="/usage/transaction",method = RequestMethod.GET)
+	public @ResponseBody String findTransactionLength() {
+		 Integer Arrlength = (tservice.findAllTransaction().size())+1;
+		 String l = Arrlength.toString();
+		 return l;
+	}
+	
+	
 	@RequestMapping(value = "/usage/customer/{customerId}", method= RequestMethod.GET)
 	public @ResponseBody String findCustomerName(@PathVariable String customerId){
 		return cservice.findCustomer(Integer.parseInt(customerId)).getCustomerName();
@@ -66,11 +80,13 @@ public class MechanicController {
 	
 
 	
-	/*@RequestMapping(value = "/usage",method = RequestMethod.POST)
-	public ModelAndView approveTransaction(WebRequest request){
-		
+	@RequestMapping(value = "/usage",method = RequestMethod.POST)
+	public ModelAndView approveTransaction(@RequestBody Transaction tran){
+		ModelAndView mav = new ModelAndView("Testing");
+		mav.addObject("t", tran);
+		return mav;
 	}
-	*/
+	
 	
 /*	@RequestMapping(value = "/course/edit/{id}", method = RequestMethod.POST)
 	public ModelAndView approveOrRejectCourse(@ModelAttribute("approve") Approve approve, BindingResult result,

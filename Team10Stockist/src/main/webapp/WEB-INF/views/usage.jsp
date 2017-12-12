@@ -20,6 +20,16 @@
 						<option value="${customer.customerId}">${customer.customerId}</option>
 					</c:forEach>
 			</select></td>
+			<td><spring:message code="fieldLabel.transID" /></td>
+			<td colspan="3">
+				<input id="txttransId" size="25" readonly= "readonly"/>
+			</td>
+		</tr>
+		<tr>
+			<td><spring:message code="fieldLabel.customerName" /></td>
+			<td colspan="3">
+				<input id="txtcName" size="25" readonly= "readonly"/>
+			</td>
 			<td><spring:message code="fieldLabel.partNumber" /></td>
 			<td colspan="3">
 			<select name='selectPart' id="selectPart" onchange ="showPartDetails()">
@@ -28,12 +38,6 @@
 						<option value="${product.partNumber}">${product.partNumber}</option>
 					</c:forEach>
 			</select>	
-			</td>
-		</tr>
-		<tr>
-			<td><spring:message code="fieldLabel.customerName" /></td>
-			<td colspan="3">
-				<input id="txtcName" size="25" readonly= "readonly"/>
 			</td>
 			<td><spring:message code="fieldLabel.partName" /></td>
 			<td colspan="3">
@@ -68,16 +72,20 @@
 				<td colspan="3"></td>
 			</tr>
 		</table>
-	<table id="transTable" border="1">
-			<tr>
-				<th>Part Number</th>
-				<th>Part Name</th>
-				<th>Quantity</th>
-				<th>Unit Price</th>
-				<th>Total Price</th>
-				<th></th>
-			</tr>
-	</table>
+		<table id="transTable" border="1">
+			<thead>
+				<tr>
+					<th>Part Number</th>
+					<th>Part Name</th>
+					<th>Quantity</th>
+					<th>Unit Price</th>
+					<th></th>
+				</tr>
+			<thead>
+			<tbody>
+			</tbody>
+
+		</table>
 	<table>
 	<tr>
 		<td colspan="10" align="left"><input type="button" value="Submit"onclick="submitTransaction()"/></td>
@@ -92,6 +100,10 @@
 </form:form>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
+
+$( document ).ready(getTransactionId());
+
+
 function showCustomerName() {
 	var a = selectCustomer.options[selectCustomer.selectedIndex].value;
 	var txtcName = document.getElementById('txtcName');
@@ -109,6 +121,15 @@ function showPartDetails() {
 	$.ajax({url: searchurl2, success:function(result2){txtUprice.value =result2}}); 
 }
 
+function getTransactionId(){
+	//var txttransId = document.getElementById('txttransId').value;
+	var searchurl ="/team10stockist/mechanic/usage/transaction";
+	$.ajax({url: searchurl, success:function(result){
+		document.getElementById('txttransId').value=result;}});
+}
+
+
+
 function clearText()  
 {
     document.getElementById('txtQty').value = "";
@@ -125,12 +146,11 @@ function addItemAndRow(){
 		window.alert("Part quantity cannot be empty.");
 	}
 	else {
-		var t = $("#transTable");
+		var t = $("#transTable tbody");
 		t.append("<tr><td><input id=\"txtTtpid"+index+"\" readonly= \"readonly\" class=\"classPartnumber\" style=\"border:0\"/></td>"+
 				"<td><input id=\"txtTtpName"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
 				"<td><input type=\"text\" id=\"txtTtQty"+index+"\" class=\"classQuantity\" style=\"border:0\"/></td>"+
 				"<td><input id=\"txtTtPrice"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
-				"<td><input id=\txtTtSubTotal"+index+"\" readonly= \"readonly\" style=\"border:0\"/></td>"+
 				"<td><input type=\"button\" id=\"btnDlt"+index+"\" class=\"Delete\" value=\"Delete\" onclick= \"deleteThisRow(this)\"/></td></tr>");
 			var a = selectPart.options[selectPart.selectedIndex].value;
 			var aId = "txtTtpid"+index;
@@ -159,7 +179,7 @@ function deleteThisRow(btn){
 	
 	}   
 
-function submitTransaction(){
+/* function submitTransaction(){
 	var q = document.getElementsByClassName("classQuantity");
 	var p = document.getElementsByClassName("classPartnumber");
 	var quantity = [];
@@ -183,10 +203,40 @@ function submitTransaction(){
 	window.alert(qjson);
 	window.alert(pjson);
 	
-	$.post(url:"/team10stockist/mechanic/usage/",
+	 $.post(url:"/team10stockist/mechanic/usage/",
 			data: { json_1:$.toJSON(qjson), json_2:$.toJSON(pjson)}
 			)
-}
+}*/
+
+/* function submitTransaction(){
+	/* var table = $('#transTable').DataTable();
+	var data = table.rows().data(); */
+/* 	var x = document.getElementById('transTable').tBodies[0].rows.length;
+	window.alert(x); 
+	
+	var transaction = 
+	{
+	    "transId":"",
+	    "customer":{"id":"1"},
+	    "transactionDetails":[
+	        {"quantity":"1","product":{"id":"1"}},
+	        {"quantity":"1","product":{"id":"2"}}
+	        ],
+	    "user":{"id":1}
+	}
+	
+	$.post({url:"/team10stockist/mechanic/usage", data:{
+	    "transId":"",
+	    "customer":{"id":"1"},
+	    "transactionDetails":[
+	        {"quantity":"1","product":{"id":"1"}},
+	        {"quantity":"1","product":{"id":"2"}}
+	        ],
+	    "user":{"id":1}
+	},.  success:function(){window.alert("success!!!!")}});
+	
+} */
+
 
 </script>
 </body>
