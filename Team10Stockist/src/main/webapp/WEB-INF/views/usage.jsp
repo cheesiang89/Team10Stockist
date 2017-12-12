@@ -20,10 +20,6 @@
 						<option value="${customer.customerId}">${customer.customerId}</option>
 					</c:forEach>
 			</select></td>
-			<td><spring:message code="fieldLabel.transID" /></td>
-			<td colspan="3">
-				<input id="txttransId" size="25" readonly= "readonly"/>
-			</td>
 		</tr>
 		<tr>
 			<td><spring:message code="fieldLabel.customerName" /></td>

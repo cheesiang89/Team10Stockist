@@ -52,13 +52,13 @@ public class MechanicController {
 		return mav;
 	}
 
-	@RequestMapping(value="/usage/transaction",method = RequestMethod.GET)
+/*	@RequestMapping(value="/usage/transaction",method = RequestMethod.GET)
 	public @ResponseBody String findTransactionLength() {
 		 Integer Arrlength = (tservice.findAllTransaction().size())+1;
 		 String l = Arrlength.toString();
 		 return l;
 	}
-	
+	*/
 	
 	@RequestMapping(value = "/usage/customer/{customerId}", method= RequestMethod.GET)
 	public @ResponseBody String findCustomerName(@PathVariable String customerId){
@@ -77,7 +77,6 @@ public class MechanicController {
 		return strUnitPrice;
 	}
 	
-
 	
 	@RequestMapping(value = "/usage",method = RequestMethod.POST)
 	@ResponseBody
@@ -89,15 +88,15 @@ public class MechanicController {
 		if (us == null) return "redirect:/home";
 		User user= us.getUser();
 		Date now = new Date();
+		Integer customerId = json.get(0).get("customerId");
+		Transaction transaction = new Transaction();
+		transaction.setUser(user);
+		transaction.setCustomer(cservice.findCustomer(customerId));
+		transaction.setDatetime(now);
+		transactionService.saveTrans(transaction); 
 		for (Map<String, Integer> row: json) {
-			Integer customerId = row.get("customerId");
 			Integer partNumber = row.get("partNumber");
 			Integer quantity = row.get("quantity");
-			Transaction transaction = new Transaction();
-			transaction.setUser(user);
-			transaction.setCustomer(cservice.findCustomer(customerId));
-			transaction.setDatetime(now);
-			transactionService.saveTrans(transaction);  // get the id
 			TransactionDetail transactionDetail = new TransactionDetail();
 			TransactionDetailPK pk = new TransactionDetailPK();
 			pk.setTransId(transaction.getTransId());
@@ -111,36 +110,6 @@ public class MechanicController {
 		return "success";
 	}
 	
-/*	@RequestMapping(value = "/course/edit/{id}", method = RequestMethod.POST)
-	public ModelAndView approveOrRejectCourse(@ModelAttribute("approve") Approve approve, BindingResult result,
-			@PathVariable Integer id, HttpSession session, final RedirectAttributes redirectAttributes) {
-		if (result.hasErrors())
-			return new ModelAndView("manager-course-detail");
-		Course c = cService.findCourse(id);
-		CourseEvent ce = new CourseEvent();
-		UserSession us = (UserSession) session.getAttribute("USERSESSION");
-		if (approve.getDecision().equalsIgnoreCase(Course.APPROVED)) {
-			ce.setEventType(Course.APPROVED);
-			c.setStatus(Course.APPROVED);
-		} else {
-			ce.setEventType(Course.REJECTED);
-			c.setStatus(Course.REJECTED);
-		}
-		ce.setEventBy(us.getEmployee().getEmployeeId());
-		ce.setComment(approve.getComment());
-		ce.setTimeStamp(Calendar.getInstance().getTime());
-		ce.setCourse(c);
-		ArrayList<CourseEvent> celist = c.getEvents();
-		celist.add(ce);
-		c.setEvents(celist);
-		System.out.println(c.toString());
-		cService.changeCourse(c);
-		ceService.createCourseEvent(ce);
-		ModelAndView mav = new ModelAndView("redirect:/manager/pending");
-		String message = "Course was successfully updated.";
-		redirectAttributes.addFlashAttribute("message", message);
-		return mav;
-	}*/
 
 	
 }
