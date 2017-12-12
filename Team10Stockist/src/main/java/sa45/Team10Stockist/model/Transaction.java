@@ -4,8 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 /**
  * The persistent class for the transaction database table.
  * 
@@ -17,6 +17,7 @@ public class Transaction implements Serializable {
 
 	@Id
 	@Column(name="trans_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int transId;
 
 	@Temporal(TemporalType.TIMESTAMP)
