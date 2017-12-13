@@ -182,7 +182,7 @@ hr {
 /*     padding-top:3px */
 /* } */
 
-#products #PartTable #sTable {
+#products, #PartTable, #sTable {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;

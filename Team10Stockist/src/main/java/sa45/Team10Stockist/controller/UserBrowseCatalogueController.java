@@ -50,9 +50,6 @@ public class UserBrowseCatalogueController {
 
 		ModelAndView mav = new ModelAndView("browse-catalogue");
 		ArrayList<Product> productList = (ArrayList<Product>) pService.findAllProductByCriteria(criteria);
-		// ArrayList<Product> productList =
-		// (ArrayList<Product>)pService.findAllProductByCriteria(new String[]
-		// {"","",""});
 		mav.addObject("plist", productList);
 		return mav;
 

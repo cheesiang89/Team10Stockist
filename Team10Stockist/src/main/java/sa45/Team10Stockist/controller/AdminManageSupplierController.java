@@ -57,39 +57,6 @@ public class AdminManageSupplierController {
 	}
 	
 	
-	/*@RequestMapping(value = "/management/supplier/edit/{sid}", method = RequestMethod.GET)
-	//@ModelAttribute
-	//@ResponseBody
-	public ModelAndView supplierManagementEdit(@PathVariable String sid) {
-		System.out.println("sssss");
-		ModelAndView mav = new ModelAndView("editPanel");
-		//ArrayList<Supplier> slist = sservice.findAllSupplier();
-		Supplier s = sservice.findSupplier(Integer.parseInt(sid));
-		List<Product> plist = s.getProducts();		
-		mav.addObject("plist", plist);
-		mav.addObject("s",s);
-		return mav;
-	}*/
-	
-	/*@RequestMapping(value = "/management/supplier/edit/{sid}", method = RequestMethod.GET)
-	@ModelAttribute
-	//@ResponseBody
-	public void supplierManagementEdit(@PathVariable String sid, Model model) {
-		System.out.println("sssss");
-		Supplier s = sservice.findSupplier(Integer.parseInt(sid));
-		model.addAttribute("supplier",s);
-	}*/
-	
-	/*@RequestMapping(value = "/management/supplier/edit/{sid}", method = RequestMethod.GET)
-	public ResponseEntity<Supplier> supplierManagementEdit(@PathVariable String sid) {
-		System.out.println("sssss");
-		ModelAndView mav = new ModelAndView("editPanel");
-		//ArrayList<Supplier> slist = sservice.findAllSupplier();
-		Supplier s = sservice.findSupplier(Integer.parseInt(sid));
-		return new ResponseEntity<Supplier>(s, HttpStatus.OK);
-		//return	sservice.findSupplier(Integer.parseInt(sid));
-		//return pservice.findProductsBySupplierId(sid);
-	}*/
 	@RequestMapping(value = "/management/supplier/edit/{sid}", method = RequestMethod.GET)
 	public @ResponseBody List<Product> supplierManagementEdit(@PathVariable String sid) {
 		Supplier s = sservice.findSupplier(Integer.parseInt(sid));

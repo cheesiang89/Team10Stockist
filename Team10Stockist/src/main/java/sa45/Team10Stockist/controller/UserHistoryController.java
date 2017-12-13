@@ -32,7 +32,6 @@ public class UserHistoryController {
 	public ModelAndView historyProduct(@PathVariable String partNumber, HttpSession session){
 		ModelAndView mav = new ModelAndView("history");
 		if (session.getAttribute("USERSESSION") == null) {
-			// Can be replaced with access denial
 			mav.setViewName("redirect:/home");
 		} else {
 		Product p = pService.findProduct(Integer.parseInt(partNumber));
@@ -42,7 +41,6 @@ public class UserHistoryController {
 		for(TransactionDetail t : tlist) {
 			tset.add(t.getTransaction());
 		}		
-//		mav.addObject("p", p);
 		mav.addObject("tlist", tlist);
 		}
 		return mav;		

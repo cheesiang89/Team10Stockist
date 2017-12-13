@@ -71,7 +71,6 @@ public class MechanicController {
 	
 	
 	@RequestMapping(value = "/usage",method = RequestMethod.POST)
-	//@ResponseBody
 	/**
 	 * json -> [{customerId: 3, partNumber: 78, quantity: 11}]
 	 */
@@ -106,17 +105,8 @@ public class MechanicController {
 			p.setStockQuantity(invQty);
 			pservice.changeProduct(p);
 		}
-		/*ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/home");*/
-		//return mav;
+
 		return "success";
 	}
-	
-	/*@RequestMapping(value = "/usage", method = RequestMethod.POST)
-	public ModelAndView editProductPage() {
-		ModelAndView mav = new ModelAndView("redirect:/home/mechanic/usage");
-		return mav;
-	}*/
-
 	
 }

@@ -43,7 +43,6 @@ public class AdminManageProductController {
 		Product p = new Product();
 		ModelAndView mav = new ModelAndView("add", "product", p);
 		if (session.getAttribute("USERSESSION") == null) {
-			// Can be replaced with access denial
 			mav.setViewName("redirect:/home");
 		}
 		return mav;
