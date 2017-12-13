@@ -19,41 +19,22 @@ public class ProductValidator implements Validator{
 
 	@Override
 	public void validate(Object arg0, Errors arg1) {
-		// TODO Auto-generated method stub
-		Product product = (Product) arg0;
-		if(StringUtils.isEmpty(product.getColor())) {
-			arg1.rejectValue("color", "error.color");
-		}
-
-		if(StringUtils.isEmpty(product.getName())) {
-			arg1.rejectValue("name","Product name is required ");
-		}
-		if(StringUtils.isEmpty(product.getDescription())) {
-			arg1.rejectValue("description","Description is required ");
-		}
-		if(StringUtils.isEmpty(product.getDimension())) {
-			arg1.rejectValue("dimension","Dimension is required ");
-		}
-		if(StringUtils.isEmpty(product.getShelfLocation())) {
-			arg1.rejectValue("shelfLocation","Shelf location is required ");
-		}
-		if(StringUtils.isEmpty(product.getUnitPrice())){
-			arg1.rejectValue("unitPrice", "Unit Price is required");
-		}
-		if(StringUtils.isEmpty(product.getManufacturer())) {
-			arg1.rejectValue("manufacturer", "Manufacturer is required");
-		}
-		if(StringUtils.isEmpty(product.getMinimumInventoryQuantity())) {
-			arg1.rejectValue("minimumInventoryQuantity","Please enter minimum inventory quantity");
-		}
-		if(StringUtils.isEmpty(product.getStockQuantity())) {
-			arg1.rejectValue("stockQuantity","Please enter stock quantity  ");
-		}
-		if(StringUtils.isEmpty(product.getMinimumReorderQuantity())) {
-			arg1.rejectValue("MinimumReorderQuantity","Please enter minimum reorder quantity");
-		}
-		System.out.println(product.toString());
+//		Product product = (Product) arg0;
+//		if(StringUtils.isEmpty(product.getColor())) {
+//			arg1.rejectValue("color", "error.color");
+//		}
+//		System.out.println(product.toString());
 		
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "name", "error.name", "Name is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "color", "error.color", "Color is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "description", "error.description", "Description is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "dimension", "error.dimension", "Dimension is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "shelfLocation", "error.shelfLocation", "Shelf Location is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "unitPrice", "error.unitPrice", "Unit Price is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "manufacturer", "error.manufacturer", "Manufacturer is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "minimumInventoryQuantity", "error.minimumInventoryQuantity", "Please enter minimum inventory quantity.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "stockQuantity", "error.stockQuantity", "Please enter stock quantity.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(arg1, "MinimumReorderQuantity", "error.MinimumReorderQuantity", "Please enter minimum reorder quantity.");
 	}
 
 }
