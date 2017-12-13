@@ -36,8 +36,9 @@
 
 <div id="productList"></div>
 
-<div id="addRow" >
-
+<div id="updateRow" >
+<input id="updateButton" type="button" value="Update" onclick="updateSupplier()"/>
+<input id="addButton" type="button" value="Add" onclick="addSupplier()"/>
 </div>
 
 <!-- <div id="addButton">
@@ -47,7 +48,10 @@
 </div>
 <script>
 function addPartRow(){
-	var goToUrl="/team10stockist/admin/management/supplier/getProduct/"+$("#addPartSelect").val();
+	var pIdToAdd = $("#addPartSelect").val();
+	if(pIdToAdd==""){window.alert("Please select a product first")}
+	else{
+	var goToUrl="/team10stockist/admin/management/supplier/getProduct/"+pIdToAdd;
 	
 	$.ajax
 	({url:goToUrl,success:
@@ -62,4 +66,92 @@ function addPartRow(){
 					"<td><input type=\"button\" value=\"Delete\" onclick=\"deletePartRow(this)\"></td></tr>")
 		}
 	})
-}</script>
+}}
+
+function updateSupplier(){
+	
+	window.alert(document.getElementById("text-sname").value);
+	var data = [];
+	var tds = $(".td-pid");
+	tds.each(function(index, td)
+		{
+		 	//alert(td.innerHTML);
+		 	data.push({
+		 		supplierId : document.getElementById("text-sname").value,
+		 		supplierName : document.getElementById("text-sname").value,
+		 		contact : document.getElementById("text-contact").value,
+				partNumber: parseInt(td.innerHTML),
+			});
+		}
+	);
+	
+	$.ajax({
+		method: 'POST',
+		url: '/team10stockist/admin/management/supplier/update',
+		data: JSON.stringify(data),
+		contentType: 'application/json',
+		success: function () {
+		    alert('success');
+		}
+	});
+	/* 
+	for (let i = 0; i < rows.length; i++) {
+		alert(rows[i].getElementsByClassName("td-pid")[0].innerHTML)
+	}
+	
+	$('#transTable tbody tr').each(function (i, tr) {
+	    var row = $(tr);
+	    data.push({
+			customerId: parseInt($('.classCustomerId', row).val(), 10),
+			partNumber: parseInt($('.classPartnumber', row).val(), 10),
+			quantity: parseInt($('.classQuantity', row).val(), 10)
+		});
+	}); */
+	/* for (i=0,)
+	$('#PartTable tr').each(function (index, tr) {
+
+	    window.alert(tr.getElementsByClassName("td-pid")[0].innerHTML);
+
+	});
+	console.log(data); */
+	/*$.ajax({
+		method: 'POST',
+		url: '/team10stockist/mechanic/usage',
+		data: JSON.stringify(data),
+		contentType: 'application/json',
+		success: function () {
+		    console.log('success');
+		}
+	}); */
+	
+	
+}
+
+function addSupplier(){
+	
+	window.alert(document.getElementById("text-sname").value);
+	var data = [];
+	var tds = $(".td-pid");
+	tds.each(function(index, td)
+		{
+		 	//alert(td.innerHTML);
+		 	data.push({
+		 		supplierId : document.getElementById("text-sname").value,
+		 		supplierName : document.getElementById("text-sname").value,
+		 		contact : document.getElementById("text-contact").value,
+				partNumber: parseInt(td.innerHTML),
+			});
+		}
+	);
+	
+	$.ajax({
+		method: 'POST',
+		url: '/team10stockist/admin/management/supplier/add',
+		data: JSON.stringify(data),
+		contentType: 'application/json',
+		success: function () {
+		    alert('success');
+		}
+	});
+}
+</script>

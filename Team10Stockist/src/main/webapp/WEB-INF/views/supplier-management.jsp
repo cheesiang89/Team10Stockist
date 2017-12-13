@@ -101,7 +101,24 @@ function filt(filter) {
 
 
 function addSupplier(){
-	
+	$("#sname").html("Adding New Supplier ");
+	$("#text-sid").prop("readonly", false);
+	p.html("");
+	var text;
+	text = ("<table id=\"PartTable\">"+
+			"<tr><th>Part Number</th>"+
+			"<th>Name</th>"+
+			"<th>Color</th>"+
+			"<th>Description</th>"+
+			"<th>Dimension</th>"+
+			"<th>Detail</th>"+
+			"<th>Delete</th>"+
+			"</tr>");
+	text = text + ("</table>");
+	p.append(text);
+	$("#updateButton").css("display", "none");
+	$("#addButton").css("display", "inline");
+	modal.style.display = "block";
 }
 
 /* function showPanel(btn){
@@ -194,6 +211,7 @@ function showPanel (btn) {
 		success:function(result)
 		{
 			$("#sname").html("Supplier " + sname);
+			$("#text-sid").prop("readonly", true);
 			$("#text-sid").val(sid);
 			$("#text-sname").val(sname);
 			$("#text-contact").val(contact);
@@ -227,7 +245,8 @@ function showPanel (btn) {
 			p.append(text);
 			}
 	});
-	//alert("good");
+	$("#updateButton").css("display", "inline");
+	$("#addButton").css("display", "none");
 	modal.style.display = "block";
 }
 

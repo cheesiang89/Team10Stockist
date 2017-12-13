@@ -2,6 +2,7 @@ package sa45.Team10Stockist.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -92,9 +94,44 @@ public class AdminManageSupplierController {
 		Supplier s = sservice.findSupplier(Integer.parseInt(sid));
 		return s.getProducts();
 	}
+	
 	@RequestMapping(value = "/management/supplier/getProduct/{pid}", method = RequestMethod.GET)
 	public @ResponseBody Product getProductById(@PathVariable String pid) {
 		Product p = pservice.findProduct(Integer.parseInt(pid));
 		return p;
+	}
+	
+	@RequestMapping(value = "/management/supplier/update", method = RequestMethod.POST)
+	public @ResponseBody void updateSupplier(@RequestBody List<Map<String, String>> json) {
+		int sid = Integer.parseInt(json.get(0).get("supplierId"));
+		Supplier s = sservice.findSupplier(sid);
+		s.setSupplierName(json.get(0).get("supplierName"));
+		s.setContactNumber(Integer.parseInt(json.get(0).get("contact")));
+		ArrayList<Product> plist = new ArrayList<Product>();
+		System.out.println("0000001");
+		for(Map<String,String> row : json) {
+			int pNo = Integer.parseInt(row.get("partNumber"));
+			Product p = pservice.findProduct(pNo);
+			plist.add(p);
+		}
+		s.setProducts(plist);
+		sservice.changeSupplier(s);
+	}
+	
+	@RequestMapping(value = "/management/supplier/add", method = RequestMethod.POST)
+	public @ResponseBody void addSupplier(@RequestBody List<Map<String, String>> json) {
+		Supplier s = new Supplier();
+		s.setSupplierId(Integer.parseInt(json.get(0).get("supplierId")));
+		s.setSupplierName(json.get(0).get("supplierName"));
+		s.setContactNumber(Integer.parseInt(json.get(0).get("contact")));
+		ArrayList<Product> plist = new ArrayList<Product>();
+		System.out.println("0000001");
+		for(Map<String,String> row : json) {
+			int pNo = Integer.parseInt(row.get("partNumber"));
+			Product p = pservice.findProduct(pNo);
+			plist.add(p);
+		}
+		s.setProducts(plist);
+		sservice.createSupplier(s);
 	}
 }
