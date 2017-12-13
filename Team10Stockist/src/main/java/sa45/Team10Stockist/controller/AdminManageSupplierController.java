@@ -90,7 +90,11 @@ public class AdminManageSupplierController {
 	@RequestMapping(value = "/management/supplier/edit/{sid}", method = RequestMethod.GET)
 	public @ResponseBody List<Product> supplierManagementEdit(@PathVariable String sid) {
 		Supplier s = sservice.findSupplier(Integer.parseInt(sid));
-		System.out.println("******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
 		return s.getProducts();
+	}
+	@RequestMapping(value = "/management/supplier/getProduct/{pid}", method = RequestMethod.GET)
+	public @ResponseBody Product getProductById(@PathVariable String pid) {
+		Product p = pservice.findProduct(Integer.parseInt(pid));
+		return p;
 	}
 }

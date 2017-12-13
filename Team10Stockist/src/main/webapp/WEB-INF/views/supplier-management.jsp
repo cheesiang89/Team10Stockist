@@ -7,7 +7,6 @@
 
 
 <div>
-		
 		<span>Part: </span>
 		
 		<select id="partSelect" name="Part" onchange="filt(this.value)">
@@ -28,7 +27,9 @@
 <div>
 	<c:import url="/WEB-INF/views/supplierList.jsp" />
 </div>
-
+<div>
+	<input type="button" value="Add Supplier" onclick="addSupplier()"/>
+</div>
 
 <div id="myModal" class="modal">
 	<div class="modal-content">
@@ -38,7 +39,7 @@
 		</div>
 
 		<div id="panel" class="modal-body">
-			
+			<c:import url="/WEB-INF/views/editPanel.jsp" ></c:import>
 		</div>
 	</div>
 </div>
@@ -99,11 +100,22 @@ function filt(filter) {
 }
 
 
-function showPanel(btn){
+function addSupplier(){
+	
+}
+
+/* function showPanel(btn){
 	var sid = btn.parentNode.parentNode.getElementsByClassName("td-sid")[0].innerHTML;
 	var sname = btn.parentNode.parentNode.getElementsByClassName("td-sname")[0].innerHTML;
 	var contact = btn.parentNode.parentNode.getElementsByClassName("td-contact")[0].innerHTML;
 	var goToUrl = ("/team10stockist/admin/management/supplier/edit/" + sid);
+	var selectOption =
+
+	<c:forEach var="p" varStatus="idx" items="${plist}">
+	"<option value=\"( ${p.partNumber} )\">${p.name} ( ${p.partNumber} )</option>"+
+	</c:forEach>
+
+	
 	$("#panel").html("");
 	$("#sname").html("Supplier " + sname);
 	$("#panel").html(
@@ -123,8 +135,12 @@ function showPanel(btn){
 		"</tr>"+
 		"<tr>"+
 		"<td><span class=\"edititem\">Supply: </span></td>"+
-		
-		"<td><span class=\"edititem\">Supply: </span>"+
+		"<td>"+
+		"<select id=\"addPartNumber\">"+
+		"<option value="">All</option>"+
+		selectOption+
+		"</select>"+
+		"<input type=\"button\" value=\"Add Part\">"+
 		"</td>"+
 		"</tr>"+
 		"</table>"+
@@ -158,13 +174,62 @@ function showPanel(btn){
 				}
 			)
 			text = text + ("</table>");
-/* 			text = text + ("<span><input type=\"button\" value=\"Add\"></span>") */
 			$("#panel").append(text);
 			}
 	});
 	modal.style.display = "block";
-}
+} */
 
+function showPanel (btn) {
+	var sid = btn.name;
+	var sname = btn.parentNode.parentNode.getElementsByClassName("td-sname")[0].innerHTML;
+	var contact = btn.parentNode.parentNode.getElementsByClassName("td-contact")[0].innerHTML;
+	var goToUrl = ("/team10stockist/admin/management/supplier/edit/" + sid);
+	//window.alert(sid);
+	//var goToUrl = 
+	//alert('a');
+	$.ajax
+	({
+		type:"get" , url: goToUrl, 
+		success:function(result)
+		{
+			$("#sname").html("Supplier " + sname);
+			$("#text-sid").val(sid);
+			$("#text-sname").val(sname);
+			$("#text-contact").val(contact);
+			p.html("");
+			var text;
+			text = ("<table id=\"PartTable\">"+
+					"<tr><th>Part Number</th>"+
+					"<th>Name</th>"+
+					"<th>Color</th>"+
+					"<th>Description</th>"+
+					"<th>Dimension</th>"+
+					"<th>Detail</th>"+
+					"<th>Delete</th>"+
+					"</tr>");
+			$.each
+			(result, function(productIndex, productDetail)
+				{
+				
+				//window.alert(productDetail.partNumber);
+				
+				text = text + ("<tr><td class=\"td-pid\">"+productDetail.partNumber+"</td>"+
+						"<td class=\"td-pname\">"+productDetail.name+"</td>"+
+						"<td>"+productDetail.color+"</td>"+
+						"<td>"+productDetail.description+"</td>"+
+						"<td>"+productDetail.dimension+"</td>"+
+						"<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/home/catalogue/product/"+productDetail.partNumber +"'\"></td>"+
+						"<td><input type=\"button\" value=\"Delete\" onclick=\"deletePartRow(this)\"></td></tr>");
+				}
+			)
+			text = text + ("</table>");
+			p.append(text);
+			}
+	});
+	//alert("good");
+	modal.style.display = "block";
+}
 
 function deleteSupplierRow(btn){
 	const no =btn.parentNode.parentNode.getElementsByClassName("td-sid")[0].innerHTML;
@@ -198,5 +263,9 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+
+
+
 </script>
 </body>
