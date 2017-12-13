@@ -28,7 +28,7 @@
 	<c:import url="/WEB-INF/views/supplierList.jsp" />
 </div>
 <div>
-	<input type="button" value="Add Supplier" onclick="addSupplier()"/>
+	<input type="button" value="Add Supplier" onclick="addSupplierPanel()"/>
 </div>
 
 <div id="myModal" class="modal">
@@ -100,7 +100,7 @@ function filt(filter) {
 }
 
 
-function addSupplier(){
+function addSupplierPanel(){
 	$("#sname").html("Adding New Supplier ");
 	$("#text-sid").prop("readonly", false);
 	$("#text-sid").val("");
