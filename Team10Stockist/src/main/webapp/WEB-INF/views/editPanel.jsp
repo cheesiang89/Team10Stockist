@@ -69,7 +69,7 @@ function addPartRow(){
 }}
 
 function updateSupplier(){
-	
+	/* 
 	window.alert(document.getElementById("text-sname").value);
 	var data = [];
 	var tds = $(".td-pid");
@@ -93,7 +93,7 @@ function updateSupplier(){
 		success: function () {
 		    alert('success');
 		}
-	});
+	}); */
 	/* 
 	for (let i = 0; i < rows.length; i++) {
 		alert(rows[i].getElementsByClassName("td-pid")[0].innerHTML)
