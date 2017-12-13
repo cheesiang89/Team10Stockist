@@ -27,4 +27,18 @@
 	</div>
 </form>
 	<c:import url="/WEB-INF/views/ProductsList.jsp" />
+<script>
+function deleteRow(btn) {
+		/*window.alert(window.location.pathname);*/
+		//window.alert("s");
+const no =btn.parentNode.parentNode.getElementsByClassName("partNumber")[0].innerHTML;
+const name =btn.parentNode.parentNode.getElementsByClassName("name")[0].innerHTML;
+if (window.confirm("Do you want to delete "+name+"( Part Number: "+no+" )?")) { 
+	const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
+	$.ajax({url: deleteurl});
+	var row = btn.parentNode.parentNode;
+	row.parentNode.removeChild(row);
+	}
+}
+</script>
 </body>

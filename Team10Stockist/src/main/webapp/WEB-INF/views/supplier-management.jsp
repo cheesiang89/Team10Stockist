@@ -119,7 +119,7 @@ function addSupplierPanel(){
 			"</tr>");
 	text = text + ("</table>");
 	p.append(text);
-	$("#updateButton").css("value", "Add");
+	$("#updateButton").prop("value", "Add");
 	modal.style.display = "block";
 }
 
