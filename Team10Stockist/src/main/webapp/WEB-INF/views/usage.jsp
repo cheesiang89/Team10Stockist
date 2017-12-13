@@ -132,8 +132,9 @@ function clearText()
 
 var index=1;
 function addItemAndRow(){
-	if(txtQty.value == ""){
-		window.alert("Part quantity cannot be empty.");
+	var reg=/^\d+$/;
+	if(!reg.test(txtQty.value)){
+		window.alert("Part quantity must be an integer.");
 	}
 	else {
 		var t = $("#transTable tbody");
