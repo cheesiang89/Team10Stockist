@@ -103,6 +103,9 @@ function filt(filter) {
 function addSupplier(){
 	$("#sname").html("Adding New Supplier ");
 	$("#text-sid").prop("readonly", false);
+	$("#text-sid").val("");
+	$("#text-sname").val("");
+	$("#text-contact").val("");
 	p.html("");
 	var text;
 	text = ("<table id=\"PartTable\">"+
