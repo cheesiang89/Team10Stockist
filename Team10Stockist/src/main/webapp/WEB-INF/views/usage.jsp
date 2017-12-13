@@ -116,7 +116,7 @@ function showPartDetails() {
 	$.ajax({url: searchurl1, success:function(result1){txtpName.value = result1}}); 
 	var txtUprice = document.getElementById('txtUprice');
 	var searchurl2="/team10stockist/mechanic/usage/part/price/"+a;
-	$.ajax({url: searchurl2, success:function(result2){txtUprice.value =result2}}); 
+	$.ajax({url: searchurl2, success:function(result2){txtUprice.value ="$" + result2}}); 
 }
 
 

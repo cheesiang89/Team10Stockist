@@ -61,7 +61,7 @@
 			}
 			t.append("<td>" + actualOrder + "</td>");
 			total= total + subtotal;
-			t.append("<td style=\"text-align:right\">" + d.format(subtotal)+ "</td>");
+			t.append("<td style=\"text-align:right\">" + formatter.format(subtotal)+ "</td>");
 		}
 		t.append("</tr>");
 		t.append("<tr><td colspan=\"7\" style=\"text-align:right\"><b>"+"Total:		"+formatter.format(total)+"</b></td></tr>");
