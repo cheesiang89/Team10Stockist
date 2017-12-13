@@ -189,7 +189,6 @@ function submitTransaction(){
 		contentType: 'application/json',
 		success: function () {
 		    console.log('success');
-		    //window.alert('Usage record successfully updated!');
 		}
 	});
 	window.alert('Usage record successfully updated!') ? "" : location.reload();

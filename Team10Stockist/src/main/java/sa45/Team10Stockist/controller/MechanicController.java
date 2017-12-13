@@ -3,7 +3,6 @@ package sa45.Team10Stockist.controller;
 import java.util.*;
 import javax.enterprise.inject.Model;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -100,7 +99,12 @@ public class MechanicController {
 			transactionDetail.setProduct(pservice.findProduct(partNumber));
 			transactionDetail.setQuantity(quantity);
 			transactionDetail.setTransaction(transaction);
-			transactionDetailService.saveTransactionDetail(transactionDetail);	
+			transactionDetailService.saveTransactionDetail(transactionDetail);
+			Product p= pservice.findProduct(partNumber);
+			Integer pdtQty = p.getStockQuantity();
+			Integer invQty = (pdtQty - quantity);
+			p.setStockQuantity(invQty);
+			pservice.changeProduct(p);
 		}
 		/*ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/home");*/
