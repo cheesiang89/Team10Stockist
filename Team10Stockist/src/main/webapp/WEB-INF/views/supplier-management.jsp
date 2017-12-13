@@ -119,86 +119,10 @@ function addSupplierPanel(){
 			"</tr>");
 	text = text + ("</table>");
 	p.append(text);
-	$("#updateButton").css("display", "none");
-	$("#addButton").css("display", "inline");
+	$("#updateButton").css("value", "Add");
 	modal.style.display = "block";
 }
 
-/* function showPanel(btn){
-	var sid = btn.parentNode.parentNode.getElementsByClassName("td-sid")[0].innerHTML;
-	var sname = btn.parentNode.parentNode.getElementsByClassName("td-sname")[0].innerHTML;
-	var contact = btn.parentNode.parentNode.getElementsByClassName("td-contact")[0].innerHTML;
-	var goToUrl = ("/team10stockist/admin/management/supplier/edit/" + sid);
-	var selectOption =
-
-	<c:forEach var="p" varStatus="idx" items="${plist}">
-	"<option value=\"( ${p.partNumber} )\">${p.name} ( ${p.partNumber} )</option>"+
-	</c:forEach>
-
-	
-	$("#panel").html("");
-	$("#sname").html("Supplier " + sname);
-	$("#panel").html(
-		"<div class=\"editdiv\">"+
-		"<table>"+
-		"<tr>"+
-		"<td><span class=\"edititem\">Supplier ID: </span></td>"+
-		"<td><input style=\"text\" id=\"text-sid\" placeHolder=\"Supplier ID\" class=\"edittext\" value=\""+sid+"\"/></td>"+
-		"</tr>"+
-		"<tr>"+
-		"<td><span class=\"edititem\">Supplier Name: </span></td>"+
-		"<td><input style=\"text\" id=\"text-sname\" placeHolder=\"Supplier Name\" class=\"edittext\" value=\""+sname+"\"/></td>"+
-		"</tr>"+
-		"<tr>"+
-		"<td><span class=\"edititem\">Contact Number: </span></td>"+
-		"<td><input style=\"text\" id=\"text-contact\" placeHolder=\"Contact Name\" class=\"edittext\" value=\""+contact+"\"/></td>"+
-		"</tr>"+
-		"<tr>"+
-		"<td><span class=\"edititem\">Supply: </span></td>"+
-		"<td>"+
-		"<select id=\"addPartNumber\">"+
-		"<option value="">All</option>"+
-		selectOption+
-		"</select>"+
-		"<input type=\"button\" value=\"Add Part\">"+
-		"</td>"+
-		"</tr>"+
-		"</table>"+
-		"</div>"
-	);
-	$.ajax
-	({
-		type:"get" , url: goToUrl, 
-		success:function(result)
-		{
-			var text;
-			text = ("<table id=\"PartTable\">"+
-					"<tr><th>Part Number</th>"+
-					"<th>Name</th>"+
-					"<th>Color</th>"+
-					"<th>Description</th>"+
-					"<th>Dimension</th>"+
-					"<th>Detail</th>"+
-					"<th class=\"deletePartRowCol\">Delete</th>"+
-					"</tr>");
-			$.each
-			(result, function(productIndex, productDetail)
-				{				
-				text = text + ("<tr><td class=\"td-pid\">"+productDetail.partNumber+"</td>"+
-						"<td class=\"td-pname\">"+productDetail.name+"</td>"+
-						"<td>"+productDetail.color+"</td>"+
-						"<td>"+productDetail.description+"</td>"+
-						"<td>"+productDetail.dimension+"</td>"+
-						"<td><input type=\"button\" value=\"Detail\" onclick=\"location.href='/team10stockist/home/catalogue/product/"+productDetail.partNumber +"'\"></td>"+
-						"<td><input type=\"button\" value=\"Delete\" class=\"deletePartRowCol\" onclick=\"deletePartRow(this)\"></td></tr>");
-				}
-			)
-			text = text + ("</table>");
-			$("#panel").append(text);
-			}
-	});
-	modal.style.display = "block";
-} */
 
 function showPanel (btn) {
 	var sid = btn.name;
@@ -248,8 +172,7 @@ function showPanel (btn) {
 			p.append(text);
 			}
 	});
-	$("#updateButton").css("display", "inline");
-	$("#addButton").css("display", "none");
+	$("#updateButton").prop("display", "Update");
 	modal.style.display = "block";
 }
 

@@ -37,37 +37,10 @@
 
 <div id="productList"></div>
 <input id="updateButton" type="button" value="Update" onclick="updateSupplier()"/>
-<input id="addButton" type="button" value="Add" onclick="addSupplier()"/>
 <br>
 </div>
 <script>
-function addSupplier(){
-	window.alert(document.getElementById("text-sname").value);
-	var data = [];
-	var tds = $(".td-pid");
-	tds.each(function(index, td)
-		{
-		 	alert(td.innerHTML);
-		 	data.push({
-		 		supplierId : document.getElementById("text-sname").value,
-		 		supplierName : document.getElementById("text-sname").value,
-		 		contact : document.getElementById("text-contact").value,
-				partNumber: td.innerHTML,
 
-			});
-		}
-	);
-	
-	$.ajax({
-		method: 'POST',
-		url: '/team10stockist/admin/management/supplier/add',
-		data: JSON.stringify(data),
-		contentType: 'application/json',
-		success: function () {
-		    alert('success');
-		}
-	}); 
-}
 function addPartRow(){
 	var pIdToAdd = $("#addPartSelect").val();
 	if(pIdToAdd==""){window.alert("Please select a product first");}
@@ -98,7 +71,7 @@ function updateSupplier(){
 		{
 		 	alert(td.innerHTML);
 		 	data.push({
-		 		supplierId : document.getElementById("text-sname").value,
+		 		supplierId : document.getElementById("text-sid").value,
 		 		supplierName : document.getElementById("text-sname").value,
 		 		contact : document.getElementById("text-contact").value,
 				partNumber: td.innerHTML,
@@ -109,7 +82,7 @@ function updateSupplier(){
 	
 	$.ajax({
 		method: 'POST',
-		url: '/team10stockist/admin/management/supplier/add',
+		url: '/team10stockist/admin/management/supplier/update',
 		data: JSON.stringify(data),
 		contentType: 'application/json',
 		success: function () {

@@ -1,5 +1,6 @@
 package sa45.Team10Stockist.controller;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -71,23 +72,6 @@ public class AdminManageSupplierController {
 	
 	@RequestMapping(value = "/management/supplier/update", method = RequestMethod.POST)
 	public @ResponseBody void updateSupplier(@RequestBody List<Map<String, String>> json) {
-		int sid = Integer.parseInt(json.get(0).get("supplierId"));
-		Supplier s = sservice.findSupplier(sid);
-		s.setSupplierName(json.get(0).get("supplierName"));
-		s.setContactNumber(Integer.parseInt(json.get(0).get("contact")));
-		ArrayList<Product> plist = new ArrayList<Product>();
-		System.out.println("0000001");
-		for(Map<String,String> row : json) {
-			int pNo = Integer.parseInt(row.get("partNumber"));
-			Product p = pservice.findProduct(pNo);
-			plist.add(p);
-		}
-		s.setProducts(plist);
-		sservice.changeSupplier(s);
-	}
-	
-	@RequestMapping(value = "/management/supplier/add", method = RequestMethod.POST)
-	public @ResponseBody void addSupplier(@RequestBody List<Map<String, String>> json) {
 		Supplier s = new Supplier();
 		s.setSupplierId(Integer.parseInt(json.get(0).get("supplierId")));
 		s.setSupplierName(json.get(0).get("supplierName"));
@@ -102,6 +86,7 @@ public class AdminManageSupplierController {
 		s.setProducts(plist);
 		sservice.createSupplier(s);
 	}
+	
 	
 	@RequestMapping(value = "/management/supplier/delete/{sid}", method = RequestMethod.GET)
 	public @ResponseBody void deleteProduct(@PathVariable String sid,
