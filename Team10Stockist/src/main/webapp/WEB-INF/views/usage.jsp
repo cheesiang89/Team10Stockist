@@ -42,7 +42,7 @@
 		</tr>
 		<tr>
 			<td><spring:message code="fieldLabel.date" /></td>
-			<td colspan="3"><input type="date" id="transTime" name="transTime" size="25"/></td>
+			<td colspan="3"><input type="date" id="transTime" name="transTime" size="25" readonly="readonly"/></td>
 			<td><spring:message code="fieldLabel.quantity" /></td>
 			<td colspan="3">
 				<input id="txtQty" size="25" />
@@ -97,9 +97,11 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 
-$( document ).ready(getTransactionId());
+$(document).ready(getToday()) 
 
-
+function getToday(){
+	document.getElementById("transTime").valueAsDate = new Date()
+}
 function showCustomerName() {
 	var a = selectCustomer.options[selectCustomer.selectedIndex].value;
 	var txtcName = document.getElementById('txtcName');
@@ -116,14 +118,6 @@ function showPartDetails() {
 	var searchurl2="/team10stockist/mechanic/usage/part/price/"+a;
 	$.ajax({url: searchurl2, success:function(result2){txtUprice.value =result2}}); 
 }
-
-function getTransactionId(){
-	//var txttransId = document.getElementById('txttransId').value;
-	var searchurl ="/team10stockist/mechanic/usage/transaction";
-	$.ajax({url: searchurl, success:function(result){
-		document.getElementById('txttransId').value=result;}});
-}
-
 
 
 function clearText()  
@@ -195,8 +189,10 @@ function submitTransaction(){
 		contentType: 'application/json',
 		success: function () {
 		    console.log('success');
+		    //window.alert('Usage record successfully updated!');
 		}
 	});
+	window.alert('Usage record successfully updated!') ? "" : location.reload();
 }
 
 </script>
