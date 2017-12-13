@@ -3,7 +3,6 @@ package sa45.Team10Stockist.controller;
 import java.util.*;
 import javax.enterprise.inject.Model;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,13 +51,6 @@ public class MechanicController {
 		return mav;
 	}
 
-/*	@RequestMapping(value="/usage/transaction",method = RequestMethod.GET)
-	public @ResponseBody String findTransactionLength() {
-		 Integer Arrlength = (tservice.findAllTransaction().size())+1;
-		 String l = Arrlength.toString();
-		 return l;
-	}
-	*/
 	
 	@RequestMapping(value = "/usage/customer/{customerId}", method= RequestMethod.GET)
 	public @ResponseBody String findCustomerName(@PathVariable String customerId){
@@ -79,13 +71,15 @@ public class MechanicController {
 	
 	
 	@RequestMapping(value = "/usage",method = RequestMethod.POST)
-	@ResponseBody
+	//@ResponseBody
 	/**
 	 * json -> [{customerId: 3, partNumber: 78, quantity: 11}]
 	 */
 	public String approveTransaction(@RequestBody List<Map<String, Integer>> json, HttpSession session){
 		UserSession us = (UserSession) session.getAttribute("USERSESSION");
-		if (us == null) return "redirect:/home";
+		if (us == null) 
+			return ("redirect:/home");
+			//return new ModelAndView("redirect:/home");
 		User user= us.getUser();
 		Date now = new Date();
 		Integer customerId = json.get(0).get("customerId");
@@ -106,10 +100,23 @@ public class MechanicController {
 			transactionDetail.setQuantity(quantity);
 			transactionDetail.setTransaction(transaction);
 			transactionDetailService.saveTransactionDetail(transactionDetail);
+			Product p= pservice.findProduct(partNumber);
+			Integer pdtQty = p.getStockQuantity();
+			Integer invQty = (pdtQty - quantity);
+			p.setStockQuantity(invQty);
+			pservice.changeProduct(p);
 		}
+		/*ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/home");*/
+		//return mav;
 		return "success";
 	}
 	
+	/*@RequestMapping(value = "/usage", method = RequestMethod.POST)
+	public ModelAndView editProductPage() {
+		ModelAndView mav = new ModelAndView("redirect:/home/mechanic/usage");
+		return mav;
+	}*/
 
 	
 }
