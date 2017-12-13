@@ -12,30 +12,30 @@
 	t.append("<table id=\"sTable\">");
 	t.append("<tr>");
 	//col 1
-	t.append("<th>Supplier ID<th>");
+	t.append("<th>Supplier ID</th>");
 	//col 2
-	t.append("<th>Supplier Name<th>");
+	t.append("<th>Supplier Name</th>");
 	//col 3
-	t.append("<th>Contact Number<th>");
+	t.append("<th>Contact Number</th>");
 	//col 4
-	t.append("<th>Parts<td>");
+	t.append("<th>Parts</th>");
 	t.append("<th colspan=\"2\"></th>");
 	t.append("</tr>");
 	for (Supplier s : slist) {
 		t.append("<tr class=\"td-row\">");
 		//col 1
-		t.append("<td class=\"td-sid\">"+s.getSupplierId()+"<td>");
+		t.append("<td class=\"td-sid\">"+s.getSupplierId()+"</td>");
 		//col 2
-		t.append("<td class=\"td-sname\">"+s.getSupplierName()+"<td>");
+		t.append("<td class=\"td-sname\">"+s.getSupplierName()+"</td>");
 		//col 3
-		t.append("<td class=\"td-contact\">"+s.getContactNumber()+"<td>");
+		t.append("<td class=\"td-contact\">"+s.getContactNumber()+"</td>");
 		//col 4
 		t.append("<td class=\"td-part\">");
 		for(Product p : s.getProducts()){
 			t.append(p.getName() + " ( "+p.getPartNumber()+" ) ");
 			t.append("<br>");
 		}
-		t.append("<td>");
+		t.append("</td>");
 		t.append("<td><input onclick=\"showPanel(this)\" type=\"button\" value=\"Show\" name=\""+s.getSupplierId()+"\"></td>");
 		t.append("<td><input type=\"button\" value=\"Delete\" onclick=\"deleteSupplierRow(this)\" ></td>");
 		t.append("</tr>");

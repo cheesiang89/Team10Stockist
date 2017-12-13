@@ -182,26 +182,26 @@ hr {
 /*     padding-top:3px */
 /* } */
 
-#products {
+#products #PartTable #sTable {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
 }
 
-#products td, #products th {
+#products td, #products th, #PartTable td, #PartTable th, #sTable td, #sTable th {
 	border: 1px solid #ddd;
 	padding: 8px;
 }
 
-#products tr:nth-child(even) {
+#products tr:nth-child(even), #PartTable tr:nth-child(even),#sTable tr:nth-child(even){
 	background-color: #f2f2f2;
 }
 
-#products tr:hover {
+#products tr:hover, #PartTable tr:hover, #sTable tr:hover{
 	background-color: #ddd;
 }
 
-#products th {
+#products th, #PartTable th, #sTable th{
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: center;
@@ -209,7 +209,7 @@ hr {
 	color: white;
 }
 
-#products td{
+#products td, #PartTable td, #sTable td{
 	text-align: center;
 }
 
