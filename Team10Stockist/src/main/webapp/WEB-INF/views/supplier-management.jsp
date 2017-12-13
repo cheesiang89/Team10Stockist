@@ -254,8 +254,8 @@ function deleteSupplierRow(btn){
 	const no =btn.parentNode.parentNode.getElementsByClassName("td-sid")[0].innerHTML;
 	const name =btn.parentNode.parentNode.getElementsByClassName("td-sname")[0].innerHTML;
 	if (window.confirm("Do you want to delete "+name+"( Supplier ID: "+no+" )?")) { 
-		/* const deleteurl= "/team10stockist/home/catalogue/delete/"+ no;
-		$.ajax({url: deleteurl}); */
+		const deleteurl= "/team10stockist/admin/management/supplier/delete/"+ no;
+		$.ajax({url: deleteurl});
 		var row = btn.parentNode.parentNode;
 		row.parentNode.removeChild(row);
 		

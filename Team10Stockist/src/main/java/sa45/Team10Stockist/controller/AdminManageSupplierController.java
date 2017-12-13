@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sa45.Team10Stockist.model.Product;
 import sa45.Team10Stockist.model.Supplier;
@@ -133,5 +134,11 @@ public class AdminManageSupplierController {
 		}
 		s.setProducts(plist);
 		sservice.createSupplier(s);
+	}
+	
+	@RequestMapping(value = "/management/supplier/delete/{sid}", method = RequestMethod.GET)
+	public @ResponseBody void deleteProduct(@PathVariable String sid,
+			final RedirectAttributes redirectAttributes) {
+		sservice.removeSupplier(sservice.findSupplier((Integer.parseInt(sid))));
 	}
 }
