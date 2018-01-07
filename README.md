@@ -1,6 +1,6 @@
 # Team10Stockist
 CA: Stockist-Inventory Management System
-NOTES here
+
 Use cases:
 Log in/out, View Product Listing, Record Usage, Reorder Report, Browse catalogue, Manage Users, Manage suppliers
 
